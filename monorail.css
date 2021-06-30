@@ -1,0 +1,153 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+	font-size: 12pt;
+}
+
+h1 {
+	font-size: 16pt;
+	font-weight: bold;
+	margin-bottom: 20pt;
+}
+
+sup {
+	vertical-align: super;
+	font-size: smaller;
+}
+
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+
+/* masthead and navigation stripe */
+/* from top of page to bottom of navigation stripe is 42pt */
+
+#masthead {
+	position: absolute;
+	alignment-baseline: baseline;
+	top: 0;
+	right: 60pt;
+	margin: 8pt 0 0 0;
+	padding: 0 6pt 0 8pt;
+	font-size: 36pt;
+	font-weight: bold;
+	background-color: white;
+}
+
+#navstripe {
+	float: left;
+	width: 100%;
+	margin: 18pt 0 0 0;
+	padding: 0 0 0 60pt;
+	list-style-type: none;
+}
+
+ul#navstripe li {
+	float: left;
+	vertical-align: text-bottom;
+}
+
+ul#navstripe li:hover {
+	background-color: white;
+}
+
+ul#navstripe .here {
+	background-color: white;
+}
+
+ul#navstripe .return {
+	width: 40pt;
+}
+
+ul#navstripe a {
+	display: block;
+	width: 80pt;
+	height: 14pt;
+	padding: 4pt 0 6pt 0;
+	font-size: 14pt;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	text-decoration: none;
+}
+
+/* content div */
+/* top edge is 60pt below bottom of navigation stripe */
+
+#content {
+	position: absolute;
+	top: 102pt;
+	margin: 0 100pt 0 100pt;
+	padding-bottom: 45pt;
+}
+
+/* table formatting */
+
+table {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+table th {
+	padding: 0 20pt 4pt 0;
+}
+
+table td {
+	padding: 0 20pt 4pt 0;
+}
+
+table .multi {
+	padding-right: 10pt;
+}
+
+/* class for basic info sections */
+
+.sec {
+	margin-bottom: 20pt;
+}
+
+.sec h2 {
+	font-weight: bold;
+	margin-bottom: 4pt;
+}
+
+.sec table td {
+	padding: 0 20pt 0 0;
+}
+
+.sec p {
+	margin-bottom: 8pt;
+}
+
+.sec ul {
+	margin: 8pt 0 8pt 15pt;
+}
+
+.sec ul li {
+	margin-bottom: 4pt;
+}
+
+/* class for listing publications */
+
+.pub {
+	margin-bottom: 20pt;
+	overflow: auto; /* for float clearing; see http://css-tricks.com/all-about-floats/ */
+}
+
+.pub .title {
+	font-weight: bold;
+}
+
+.pub .author {
+}
+
+.pub .cite {
+	margin-top: 4pt;
+}
+
+.pub .summary {
+	margin-top: 4pt;
+}

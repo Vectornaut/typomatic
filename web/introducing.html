@@ -1,0 +1,141 @@
+<html>
+
+<head>
+<title>Introducing Typomatic</title>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
+<link rel="stylesheet" type="text/css" href="../monorail.css" />
+<link rel="stylesheet" type="text/css" href="typomatic.css" />
+<style type="text/css">
+#masthead {
+	color: #f70094;
+}
+#navstripe {
+	background-color: #f70094;
+}
+ul#navstripe .here {
+	color: #f70094;
+}
+ul#navstripe a:hover {
+	color: #f70094;
+}
+em {
+	color: #f70094;
+}
+</style>
+</head>
+
+<body>
+<ul id="navstripe">
+<li><a class="return" href="../seeing.html">&#8617;</a></li>
+<li><a href="index.html">Hello</a></li>
+<li class="here"><a class="here" href="introducing.html">Intro</a></li>
+</ul>
+
+<div id="content">
+
+<div id="title">Intr<em>o</em>ducing Typomatic</div>
+
+<h1>What is Typomatic?</h1>
+<p>Typomatic is a typographic automatic computer.</p>
+
+<h1>Huh?</h1>
+<p>Okay, bear with me here...</p>
+
+<h1 id="computation">A quick intro to computation</h1>
+<p>What does it mean to compute something? Roughly speaking, it means to manipulate information by following a routine. That&rsquo;s a pretty vague definition, but there are lots of ways to make it more concrete. One of the simplest ones was invented in the 1950s by a Russian mathematician named Andrey Markov Jr.</p>
+<p>In Markov&rsquo;s model, "information" means a string of symbols, like this:</p>
+<blockquote>oo&lt;&lt;</blockquote>
+<p>A "routine" is described by a table like this:</p>
+<table>
+<tr><th class="ft">from</th><th class="ft">to</th></tr>
+<tr><td>+&lt;</td><td>&lt;+</td></tr>
+<tr><td>o&lt;</td><td>&lt;+o</td></tr>
+<tr><td>&lt;</td></tr>
+<tr><td>o</td></tr>
+</table>
+<p>Each line in the table describes a rule for manipulating the string. To apply a rule, you look through the string from left to right until you find a piece that matches the thing in the <span class="ft">from</span> column. Then, you replace that piece with the thing in the <span class="ft">to</span> column. Here&rsquo;s how you&rsquo;d apply the second rule in the table above to the string I mentioned earlier:</p>
+<table>
+<tr><th>From this...</th><th>to this!</th></tr>
+<tr><td>o<em>o&lt;</em>&lt;</td><td>o<em>&lt;+o</em>&lt;</td></tr>
+</table>
+<p>Sometimes, of course, the thing in the <span class="ft">from</span> column doesn&rsquo;t match any piece of the string. In that case, the rule can&rsquo;t be applied.</p>
+<p>To follow the routine described by a table of rules, you look through the table from top to bottom until you find a rule you can apply. Then you apply that rule, go back to the top of the table, and start again. Eventually, if you&rsquo;re lucky, you&rsquo;ll get to a point where none of the rules can be applied. Then you&rsquo;re done!</p>
+<p>Here&rsquo;s what happens when you use the rule table above to manipulate the string I mentioned earlier. The first step should look familiar:</p>
+<table>
+<tr><th>Step</th><th>From this...</th><th>to this!</th><th>Rule</th></tr>
+<tr><td>1</td><td>o<em>o&lt;</em>&lt;</td><td>o<em>&lt;+o</em>&lt;</td><td>2</td></tr>
+<tr><td>2</td><td><em>o&lt;</em>+o&lt;</td><td><em>&lt;+o</em>+o&lt;</td><td>2</td></tr>
+<tr><td>3</td><td>&lt;+o+<em>o&lt;</em></td><td>&lt;+o+<em>&lt;+o</em></td><td>2</td></tr>
+<tr><td>4</td><td>&lt;+o<em>+&lt;</em>+o</td><td>&lt;+o<em>&lt;+</em>+o</td><td>1</td></tr>
+<tr><td>5</td><td>&lt;+<em>o&lt;</em>++o</td><td>&lt;+<em>&lt;+o</em>++o</td><td>2</td></tr>
+<tr><td>6</td><td>&lt;<em>+&lt;</em>+o++o</td><td>&lt;<em>&lt;+</em>+o++o</td><td>1</td></tr>
+<tr><td>7</td><td><em>&lt;</em>&lt;++o++o</td><td>&lt;++o++o</td></td><td>3</td></tr>
+<tr><td>8</td><td><em>&lt;</em>++o++o</td><td>++o++o</td></td><td>3</td></tr>
+<tr><td>9</td><td>++<em>o</em>++o</td><td>++++o</td><td>4</td></tr>
+<tr><td>10</td><td>++++<em>o</em></td><td>++++</td><td>4</td></td></tr>
+</table>
+<p>At this point, none of the rules can be applied, so you&rsquo;re done! As you bask in the warm glow of accomplishment, however, you may begin to wonder what it is that you&rsquo;ve accomplished. Literally speaking, all you&rsquo;ve done is turn the string "oo&lt;&lt;" into the string "++++" by shuffling symbols around. When you look at it in a certain way, though, the game you just played takes on a deep significance.</p>
+<p>I could tell you what that significance is, but it&rsquo;s more fun if you figure it out for yourself. A good way to start is to see what happens when you use the rules above to manipulate the following nine strings:</p>
+<table>
+<tr><td>o&lt;</td><td>o&lt;&lt;</td><td>o&lt;&lt;&lt;</td></tr>
+<tr><td>oo&lt;</td><td>oo&lt;&lt;</td><td>oo&lt;&lt;&lt;</td></tr>
+<tr><td>ooo&lt;</td><td>ooo&lt;&lt;</td><td>ooo&lt;&lt;&lt;</td></tr>
+</table>
+<p>Unfortunately, all that symbol pushing is going to get tedious pretty quickly. It would be nice if you had a machine that would apply the rules for you, so you could concentrate on understanding what&rsquo;s going on. That&rsquo;s where Typomatic comes in.</p>
+<h1 id="typomatic">Computing with Typomatic</h1>
+<p>Let&rsquo;s use Typomatic to carry out the string manipulation we did by hand in the previous section.</p>
+<p>First, we need to put our table of rules into a format Typomatic can understand. Make a text file containing the following four lines:</p>
+<table>
+<tr><td>+&lt;</td><td>&lt;+</td></tr>
+<tr><td>o&lt;</td><td>&lt;+o</td></tr>
+<tr><td>&lt;</td></tr>
+<tr><td>o</td></tr>
+<table>
+<p>Save the file as <tt>rules.typo</tt>, or something like that (the .typo extension isn&rsquo;t necessary; I just use it to label Typomatic source files). Each line of the file describes a rule, with the <span class="ft">from</span> and <span class="ft">to</span> parts separated by a single tab or space character. You can use any Unicode character except tab and space in your rules. Blank lines and lines starting with two tabs in a row are ignored, giving you a way to break your code into sections and write comments.</p>
+<p>Start Typomatic using the command</p>
+<blockquote>java -jar Typomatic.jar</blockquote>
+<p>(In some desktop environments, you may also be able to start Typomatic by double-clicking the file <tt>Typomatic.jar</tt>.)
+<p>There are two text boxes at the top of the Typomatic window, labeled <i>Source</i> and <i>Input</i>. Clicking the <i>...</i> button to the right of the <i>Source</i> box will open a file chooser; use it to find the source file <tt>rules.typo</tt>. When you click <i>Open</i>, the message box at the bottom of the screen should say "New rules loaded." (You can also type the location of the source file directly into the source box, and load the file by pressing enter.)</p>
+<p>Type the input string <tt>oo&lt;&lt;</tt> into the <i>Input</i> box and press enter. The input string will appear in big characters in the middle of the Typomatic window.</p>
+<p>If you press the down arrow key, Typomatic will start manipulating the string in the middle of the window by applying the rules you loaded from the source file. If Typomatic gets to a point where none of the rules can be applied, it will stop automatically. You can stop Typomatic yourself by pressing the down arrow again. You can also use the right arrow to apply one rule at a time.</p>
+<p>If Typomatic doesn&rsquo;t seem to respond when you press an arrow key, try clicking on the string display in the middle of the Typomatic window to bring it into focus. If that doesn&rsquo;t work, check the formatting of your input file: if a rule is formatted wrong, Typomatic won&rsquo;t apply it in the way you expect. Finally, remember that string manipulation routines can be confusing. Make sure there really is a rule that ought to be applied!</p>
+
+<h1>Computing with Typomatic like a boss</h1>
+<p>Now that you&rsquo;ve got the hang of Typomatic, let&rsquo;s check out its wicked cool advanced features.</p>
+
+<h2>Stopping rules</h2>
+You can use the kind of routine you&rsquo;ve seen so far to do extraordinarily sophisticated computations, but some simple tasks are disconcertingly out of reach. For instance, there&rsquo;s no routine that will turn whatever string you start with into the same string with a single <tt>&amp;</tt> stuck on the front, and then stop. That&rsquo;s because I forgot to tell you about a tiny but essential piece of Markov&rsquo;s model of computation: stopping rules.</p>
+<p>The table you use to describe a routine is allowed to have a third column, like this:</p>
+<table>
+<tr><th class="ft">from</th><th class="ft">to</th><th class="ft">stop?</th></tr>
+<tr><td>~x</td><td>x~</td></tr>
+<tr><td>~o</td><td>o~</td></tr>
+<tr><td>~</td><td>]</td><td>%</td></tr>
+<tr><td></td><td>[~</td></tr>
+</table>
+Every time you apply a rule, you check for a <tt>%</tt> mark in the <span class="ft">stop?</span> column. If you see one, you don&rsquo;t bother going back to the top of the table and looking for another rule to apply. You&rsquo;re done! A rule with a mark in the third column is called a &ldquo;stopping rule,&rdquo; and you can have as many of them as you want.</p>
+<p>To mark a rule as a stopping rule in a Typomatic source file, just add a <tt>%</tt> character in a third column, separated from the <span class="ft">to</span> column by a single tab or space character. When Typomatic applies a stopping rule, it automatically stops running. You can start it again by pressing the down arrow or the right arrow. If you&rsquo;re using the right arrow to apply one rule at a time, stopping rules won&rsquo;t have any noticeable effect, because Typomatic would have stopped after one rule anyway.</p>
+
+<h2>Sounds and colors</h2>
+<p>Stopping is the most computationally important thing you can make Typomatic do when it applies a rule, but it isn&rsquo;t the most entertaining. You can make Typomatic play a sound when it applies a rule by adding a fourth column with one of the six sound symbols:</p>
+<blockquote>. + / $ # *</blockquote>
+<p>You may have noticed that when Typomatic applies a rule, the piece of the string being replaced flashes white for a moment. You can make the flash a different color by adding a fifth column with one of the six color symbols:</p>
+<blockquote>p o y g b v</blockquote>
+<p>As usual, columns are separated by a single tab or space character. If you put two separators in a row, Typomatic reads a blank column in between.</p>
+
+<h2>Tempo control</h2>
+Typomatic applies rules on a steady beat, at a default speed of 240 beats per minute. You can make it go faster or slower by pressing the arrows next to the <i>Tempo</i> box in the top right corner of the window. The tempo changes in increments of 60 bpm, up to a maximum of 480 bpm. If you change the tempo while Typomatic is running, Typomatic will stick to the tempo that was showing when you pressed the down arrow. You can make Typomatic switch to the new tempo by hitting the down arrow twice to stop it and start it again.<p>
+
+<h2>Fast mode</h2>
+<p>Someday, you&rsquo;ll want to do a computation so long that even the maximum tempo feels glacial. When that day comes, it&rsquo;s time for fast mode.</p>
+<p>See that button to the right of the <i>Tempo</i> control? If you haven&rsquo;t clicked it yet, it says <i>></i>, which means you&rsquo;re in slow mode. Load a fresh input string and click the slow mode indicator. The <i>></i> will change to <i>>>></i>, and the string display will be replaced by the number zero. You&rsquo;re in fast mode.</p>
+<p>The right arrow is now inoperative: you don&rsquo;t go into fast mode to apply one rule at a time. Hit the down arrow instead. The number in the middle of the window will start scrolling upward: Typomatic is applying rules as fast as your CPU can manage, and counting how many rules it&rsquo;s applied. As usual, Typomatic will stop automatically if it gets to a point where none of the rules can be applied, and you can stop it yourself by pressing the down arrow again.</p>
+<p>Unless you&rsquo;re doing a very long computation, however, you&rsquo;ll never get a chance to stop Typomatic yourself: on typical hardware, Typomatic will often finish a hundred-step computation faster than your photoreceptors can even start reporting a flash of light. You&rsquo;ll just see the counter jump to some number and stop there. To see what you&rsquo;ve accomplished, click the <i>>>></i> to switch back into slow mode. The string display will appear again, showing the result of your computation. While Typomatic is stopped, you can toggle between fast mode and slow mode as many times as you want; when you hit the down arrow again, Typomatic will pick up where it left off, using whatever mode it&rsquo;s in. You can&rsquo;t switch modes while a computation is running.</p>
+
+<h1>You can do anything</h1>
+<p>With Typomatic on your side, you can do any computation that can ever be done, and make silly noises while you&rsquo;re at it. All you need is patience, practice, and a little ingenuity. Go crunch some strings!</p>
+
+</div>
+</body>
+
+</html>
