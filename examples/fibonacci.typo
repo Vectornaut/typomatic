@@ -1,0 +1,13 @@
+		IN	m<n or m>n, where m and n are numbers in o
+		OUT	m+n>n or m>m+n, respectively
+		LOOP	forever
+
+p*	*o	.
+*q	o*	.
+*	o	#
+op	po
+o>	p>o	+
+p>	*<	$
+qo	oq
+<o	o<q	+
+<q	>*	$

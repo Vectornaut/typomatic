@@ -1,0 +1,10 @@
+		IN	a number n (in .)
+		OUT	n/2 if n is even; 3n + 1 if n is odd (in .)
+		LOOP	until n is 1
+
+.:	..		g
+:a	a...		o
+a	..		o
+..	:		v
+:.	:a	/	o
+:	.		g

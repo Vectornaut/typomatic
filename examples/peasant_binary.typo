@@ -1,0 +1,9 @@
+		IN	a number (in .)
+		OUT	the same number (in binary)
+
+*:	.*	#	o
+*.	1	+	p
+*	0	+	p
+..	:	.
+:	*:	*	y
+.	1	$

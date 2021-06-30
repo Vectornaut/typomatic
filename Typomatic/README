@@ -1,0 +1,98 @@
+((( Typomatic 1.0 )))
+Copyright 2012 Aaron Fenyes
+Open source, licensed under the GPLv3
+Source code available on request!
+
+1) WHAT IS TYPOMATIC?
+
+Typomatic is a typographic automatic computer.
+
+2) HUH?
+
+Okay, bear with me here...
+
+3) A QUICK INTRO TO COMPUTATION
+
+What does it mean to compute something? Roughly speaking, it means to manipulate information by following a routine. That's a pretty vague definition, but there are lots of ways to make it more concrete. One of the simplest ones was invented in the 1950s by a Russian mathematician named Andrey Markov Jr.
+
+In Markov's model, "information" means a string of symbols, like this:
+
+	oo<<
+
+A "routine" is described by a table like this:
+
+	FROM	TO
+
+	+<	<+
+	o<	<+o
+	<
+	o
+
+Each line in the table describes a rule for manipulating the string. To apply a rule, you look through the string from left to right until you find a piece that matches the thing in the FROM column. Then, you replace that piece with the thing in the TO column. Here's how you'd apply the second rule in the table above to the string I mentioned earlier:
+
+	From this...	to this!
+	 __		 ___
+	oo<<		o<+o<
+
+Sometimes, of course, the thing in the FROM column doesn't match any piece of the string. In that case, the rule can't be applied.
+
+To follow the routine described by a table of rules, you look through the table from top to bottom until you find a rule you can apply. Then you apply that rule, go back to the top of the table, and start again. Eventually, if you're lucky, you'll get to a point where none of the rules can be applied. Then you're done!
+
+Here's what happens when you use the rule table above to manipulate the string I mentioned earlier. The first step should look familiar:
+
+Step	From this...	to this!	Rule
+	 __		 ___
+1	oo<<		o<+o<		2
+	__		___
+2	o<+o<		<+o+o<		2
+	    __		    ___
+3	<+o+o<		<+o+<+o		2
+	   __		   __
+4	<+o+<+o		<+o<++o		1
+	  __		  ___
+5	<+o<++o		<+<+o++o	2
+	 __		 __
+6	<+<+o++o	<<++o++o	1
+	_
+7	<<++o++o	<++o++o		3
+	_
+8	<++o++o		++o++o		3
+	  _
+9	++o++o		++++o		4
+	    _
+10	++++o		++++		4
+
+At this point, none of the rules can be applied, so you're done! As you bask in the warm glow of accomplishment, however, you may begin to wonder what it is that you've accomplished. Literally speaking, all you've done is turn the string "oo<<" into the string "++++" by shuffling symbols around. When you look at it in a certain way, though, the game you just played takes on a deep significance.
+
+I could tell you what that significance is, but it's more fun if you figure it out for yourself. A good way to start is to see what happens when you use the rules above to manipulate the following nine strings:
+
+o<	o<<	o<<<
+oo<	oo<<	oo<<<
+ooo<	ooo<<	ooo<<<
+
+Unfortunately, all that symbol pushing is going to get tedious pretty quickly. It would be nice if you had a machine that would apply the rules for you, so you could concentrate on understanding what's going on. That's where Typomatic comes in.
+
+4) COMPUTING WITH TYPOMATIC
+
+Let's use Typomatic to carry out the string manipulation we did by hand in the previous section.
+
+First, we need to put our table of rules into a format Typomatic can understand. Make a text file containing the following four lines:
+
++<	<+
+o<	<+o
+<
+o
+
+Save the file as "rules.typo", or something like that (the .typo extension isn't necessary; I just use it to label Typomatic source files). Each line of the file describes a rule, with the FROM and TO parts separated by a single tab character. You can use any Unicode character except the tab character in your rules. Blank lines and lines starting with two tabs in a row are ignored, giving you a way to break your code into sections and write comments.
+
+Start Typomatic using the command
+
+	java -jar Typomatic.jar
+
+(In some desktop environments, you may also be able to start Typomatic by double-clicking the file "Typomatic.jar".)
+
+There are two text boxes at the top of the Typomatic window, labeled "Source" and "Input". Clicking the "..." button to the right of the "Source" box will open a file chooser; use it to find the source file "rules.typo". When you click "Open", the message box at the bottom of the screen should say "New rules loaded". (You can also type the location of the source file directly into the source box, and load the file by pressing enter.)
+
+Type the input string oo<< into the "Input" box and press enter. The input string will appear in big characters in the middle of the Typomatic window.
+
+If you press the down arrow key, Typomatic will start manipulating the string in the middle of the window by applying the rules you loaded from the source file. If Typomatic gets to a point where none of the rules can be applied, it will stop automatically. You can stop Typomatic yourself by pressing the down arrow again. You can also use the right arrow to apply one rule at a time.
