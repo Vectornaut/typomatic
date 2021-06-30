@@ -1,10 +1,12 @@
-		IN	[qn], where q is a number in + and n is a number in o
-		OUT	[r], where r is the number from 1 to q congruent to n mod q, in +
+		IN	a number (in +) followed by another number (in o)
+		OUT	the second number's remainder when divided by the first (in o)
 
 +x	x+	.
 +o	x	$	p
-[x	[+)	#	o
 )x	+)	#	y
-)o	o	/	o
-)+	)	+	v
-)]	]	*	o
+x	+)	#	o
+)+	(+	+	v
+)		/	o
++(	(o	#	y
+(		*	v
++		#
