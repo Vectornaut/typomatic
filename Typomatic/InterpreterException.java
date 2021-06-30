@@ -22,6 +22,7 @@ along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
 public class InterpreterException extends Exception {
 	public static final int BAD_SOUND = 0;
 	public static final int BAD_COLOR = 1;
+	public static final int BAD_STOP = 2;
 	
 	private int errorCode;
 	private String badInput;

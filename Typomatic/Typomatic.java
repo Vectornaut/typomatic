@@ -217,6 +217,8 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 							logArea.append("Line " + lineNum + ": \"" + ex.getBadInput() + "\" is not a valid sound name.\n");
 						} else if (ex.getErrorCode() == InterpreterException.BAD_COLOR) {
 							logArea.append("Line " + lineNum + ": \"" + ex.getBadInput() + "\" is not a valid color name.\n");
+						}  else if (ex.getErrorCode() == InterpreterException.BAD_STOP) {
+							logArea.append("Line " + lineNum + ": \"" + ex.getBadInput() + "\" is not the stop symbol, \"%\".\n");
 						}
 						success = false;
 					}
@@ -256,8 +258,8 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 				for (i = 0; i < rules.length; i++) {
 					if (rules[i].apply(display, tempo, soundOn)) break;
 				}
-				// if no rules were applied, pack up and go home
-				if (i == rules.length) {
+				// if no rule was applied, or a stopping rule was applied, pack up and go home
+				if (i == rules.length || rules[i].isStopping()) {
 					cancel();
 					play = null;
 				}

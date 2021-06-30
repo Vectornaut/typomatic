@@ -28,6 +28,7 @@ import javax.swing.text.StyledDocument;
 public class Rule {
 	private String from;
 	private String to;
+	private boolean stop;
 	
 	private Sound sound;
 	private AttributeSet color;
@@ -37,14 +38,21 @@ public class Rule {
 		if (tokens.length >= 1) from = tokens[0]; else from = "";
 		if (tokens.length >= 2) to = tokens[1]; else to = "";
 		if (tokens.length >= 3) {
-			if (resources.containsSound(tokens[2])) sound = resources.getSound(tokens[2]);
-			else throw new InterpreterException(InterpreterException.BAD_SOUND, tokens[2]);
+			if (tokens[2].isEmpty()) stop = false;
+			else if (tokens[2].equals("%")) stop = true;
+			else throw new InterpreterException(InterpreterException.BAD_STOP, tokens[2]);
+		} else {
+			stop = false;
+		}
+		if (tokens.length >= 4) {
+			if (resources.containsSound(tokens[3])) sound = resources.getSound(tokens[3]);
+			else throw new InterpreterException(InterpreterException.BAD_SOUND, tokens[3]);
 		} else {
 			sound = resources.getSound("");
 		}
-		if (tokens.length >= 4) {
-			if (resources.containsColor(tokens[3])) color = resources.getColor(tokens[3]);
-			else throw new InterpreterException(InterpreterException.BAD_COLOR, tokens[3]);
+		if (tokens.length >= 5) {
+			if (resources.containsColor(tokens[4])) color = resources.getColor(tokens[4]);
+			else throw new InterpreterException(InterpreterException.BAD_COLOR, tokens[4]);
 		} else {
 			color = resources.getColor("");
 		}
@@ -86,4 +94,6 @@ public class Rule {
 		if (log.isActive()) throw log;
 		return true;
 	}
+	
+	public boolean isStopping() { return stop; }
 }

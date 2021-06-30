@@ -8,7 +8,7 @@ detect_indent_width=false
 
 [project]
 name=Typomatic
-base_path=/home/aaron/Documents/code/Typomatic/1.0/
+base_path=/home/aaron/Documents/code/Typomatic/1.1/
 description=
 
 [long line marker]
@@ -16,9 +16,11 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=5653;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.0/Typomatic.java;0;4
-FILE_NAME_1=3036;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.0/Rule.java;0;4
+current_page=3
+FILE_NAME_0=1296;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.1/ResourceKit.java;0;4
+FILE_NAME_1=2941;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.1/Rule.java;0;4
+FILE_NAME_2=1217;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.1/InterpreterException.java;0;4
+FILE_NAME_3=7310;Java;0;16;1;1;0;/home/aaron/Documents/code/Typomatic/1.1/Typomatic.java;0;4
 
 [VTE]
 last_dir=/home/aaron
