@@ -43,6 +43,7 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 	private JFileChooser sourceChooser;
 	private JTextField input;
 	private JSpinner tempoPicker;
+	private JToggleButton beaverButton;
 	private JPanel settings;
 	private JPanel gui;
 	
@@ -55,6 +56,11 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 	private StepTask play;
 	boolean stepping;
 	private StyledDocument display;
+	
+	// beaver mode
+	boolean keepStepping;
+	private StringBuilder str;
+	long stepsRun;
 	
 	// resources
 	private ResourceKit resources;
@@ -102,11 +108,20 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 		sourceButton.addActionListener(this);
 		sourceChooser = new JFileChooser();
 		
+		// set up tempo controls
+		tempoPicker = new JSpinner(new SpinnerNumberModel(240, 60, 480, 60));
+		tempoPicker.addChangeListener(this);
+		beaverButton = new JToggleButton(">>>");
+		beaverButton.setMargin(new Insets(0, 0, 0, 0));
+		dim = new Dimension();
+		dim.setSize(beaverButton.getPreferredSize().getWidth(), tempoPicker.getPreferredSize().getHeight());
+		beaverButton.setPreferredSize(dim);
+		beaverButton.setText(">");
+		beaverButton.addActionListener(this);
+		
 		// put together settings panel
 		input = new JTextField(40);
 		input.addActionListener(this);
-		tempoPicker = new JSpinner(new SpinnerNumberModel(240, 60, 480, 60));
-		tempoPicker.addChangeListener(this);
 		settings = new JPanel();
 		settings.add(new JLabel("Source: "));
 		settings.add(source);
@@ -116,6 +131,7 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 		settings.add(new JLabel("Tempo: "));
 		settings.add(tempoPicker);
 		settings.add(new JLabel("bpm"));
+		settings.add(beaverButton);
 		
 		// put together gui
 		gui = new JPanel(new BorderLayout());
@@ -134,6 +150,8 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 		play = null;
 		stepping = false;
 		display = displayPane.getStyledDocument();
+		keepStepping = false;
+		stepsRun = 0;
 		
 		// create resource kit
 		resources = new ResourceKit();
@@ -148,15 +166,24 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !beaverButton.isSelected()) {
 			timer.schedule(new StepTask(), 0);
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if (play == null) {
-				play = new StepTask();
-				timer.schedule(play, 0, Math.round(60000.0/tempo));
+			if (beaverButton.isSelected()) {
+				if (keepStepping) {
+					keepStepping = false;
+				} else {
+					keepStepping = true;
+					(new Thread(new SpeedRun())).start();
+				}
 			} else {
-				play.cancel();
-				play = null;
+				if (play == null) {
+					play = new StepTask();
+					timer.schedule(play, 0, Math.round(60000.0/tempo));
+				} else {
+					play.cancel();
+					play = null;
+				}
 			}
 		}
 	}
@@ -168,15 +195,19 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == source) {
-			loadRules();
-		} else if (e.getSource() == sourceButton) {
-			if (sourceChooser.showOpenDialog(gui) == JFileChooser.APPROVE_OPTION) {
-				source.setText(sourceChooser.getSelectedFile().getPath());
+		if (!keepStepping && play == null) { // we don't want to do this stuff while a computation is running
+			if (e.getSource() == source) {
 				loadRules();
+			} else if (e.getSource() == sourceButton) {
+				if (sourceChooser.showOpenDialog(gui) == JFileChooser.APPROVE_OPTION) {
+					source.setText(sourceChooser.getSelectedFile().getPath());
+					loadRules();
+				}
+			} else if (e.getSource() == beaverButton) {
+				toggleBeaverMode();
+			} else { // event came from input field
+				setInput();
 			}
-		} else { // event came from input field
-			setInput();
 		}
 		displayPane.requestFocusInWindow();
 	}
@@ -241,11 +272,38 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 	}
 	
 	private void setInput() {
+		stepsRun = 0;
 		try {
 			display.remove(0, display.getLength());
-			display.insertString(0, input.getText(), null);
+			if (beaverButton.isSelected()) {
+				str = new StringBuilder(input.getText());
+				display.insertString(0, Long.toString(stepsRun), null);
+			} else {
+				display.insertString(0, input.getText(), null);
+			}
 		} catch (BadLocationException ex) {
 			logArea.append("Could not place input in display.\n");
+		}
+	}
+	
+	private void toggleBeaverMode() {
+		if (beaverButton.isSelected()) {
+			beaverButton.setText(">>>");
+			try {
+				str = new StringBuilder(display.getText(0, display.getLength()));
+				display.remove(0, display.getLength());
+				display.insertString(0, Long.toString(stepsRun), null);
+			} catch (BadLocationException ex) {
+				logArea.append("Trouble interacting with display.\n");
+			}
+		} else {
+			beaverButton.setText(">");
+			try {
+				display.remove(0, display.getLength());
+				display.insertString(0, str.toString(), null);
+			} catch (BadLocationException ex) {
+				logArea.append("Could not place working string in display.\n");
+			}
 		}
 	}
 	
@@ -256,7 +314,10 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 			try {
 				int i;
 				for (i = 0; i < rules.length; i++) {
-					if (rules[i].apply(display, tempo, soundOn)) break;
+					if (rules[i].apply(display, tempo, soundOn)) {
+						stepsRun++;
+						break;
+					}
 				}
 				// if no rule was applied, or a stopping rule was applied, pack up and go home
 				if (i == rules.length || rules[i].isStopping()) {
@@ -267,6 +328,48 @@ public class Typomatic implements KeyListener, ActionListener, ChangeListener {
 				dispatchLog(ex);
 			} finally {
 				stepping = false; // we're done
+			}
+		}
+	}
+	
+	private class SpeedRun implements Runnable {
+		public void run() {
+			// ticker timing
+			final long tickerDelay = 100000000;
+			long lastTickerTime = 0;
+			long currentTime;
+			
+			if (stepping) return; // if a step is running, don't interfere
+			stepping = true; // now it's our turn
+			try {
+				while (keepStepping) {
+					int i;
+					for (i = 0; i < rules.length; i++) {
+						if (rules[i].apply(str)) {
+							stepsRun++;
+							break;
+						}
+					}
+					// if no rule was applied, or a stopping rule was applied, pack up and go home
+					if (i == rules.length || rules[i].isStopping()) break;
+					
+					// update ticker
+					currentTime = System.nanoTime();
+					if (currentTime - lastTickerTime >= tickerDelay) {
+						display.remove(0, display.getLength());
+						display.insertString(0, Long.toString(stepsRun), null);
+						lastTickerTime = currentTime;
+					}
+				}
+				keepStepping = false;
+				
+				// show output
+				display.remove(0, display.getLength());
+				display.insertString(0, Long.toString(stepsRun), null);
+			} catch (BadLocationException ex) {
+				logArea.append("Trouble interacting with display.\n");
+			} finally {
+				stepping = false;
 			}
 		}
 	}

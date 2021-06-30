@@ -95,5 +95,17 @@ public class Rule {
 		return true;
 	}
 	
+	public boolean apply(StringBuilder str) {
+		// look for a substring matching this rule
+		int index = str.indexOf(from);
+		if (index == -1) {
+			return false;
+		} else {
+			// if a matching substring is found, apply the rule
+			str.replace(index, index + from.length(), to);
+			return true;
+		}
+	}
+	
 	public boolean isStopping() { return stop; }
 }
