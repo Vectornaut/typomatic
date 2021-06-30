@@ -1,12 +1,12 @@
 		IN	a number (in +) followed by another number (in o)
 		OUT	the second number's remainder when divided by the first (in o)
 
-+x	x+	.
-+o	x	$	p
-)x	+)	#	y
-x	+)	#	o
-)+	(+	+	v
-)		/	o
-+(	(o	#	y
-(		*	v
-+		#
++x	x+		.
++o	x		$	p
+)x	+)		#	y
+x	+)		#	o
+)+	(+		+	v
+)			/	o
++(	(o		#	y
+(			*	v
++			#

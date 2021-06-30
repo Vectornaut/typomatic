@@ -1,7 +1,7 @@
 		IN	a number (in o) followed by another number (in <)
 		OUT	the product of the numbers (in +)
 
-+<	<+	.
-o<	<+o	+	p
-<		*
-o		$	y
++<	<+		.
+o<	<+o		+	p
+<			*
+o			$	y

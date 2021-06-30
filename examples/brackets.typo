@@ -1,0 +1,10 @@
+		IN	any string of full-time vowels
+		OUT	the same string surrounded by [ ]
+
+~a	a~		.
+~e	e~		.
+~i	i~		.
+~o	o~		.
+~u	u~		.
+~	]	%	#
+	[~		$
