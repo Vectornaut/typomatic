@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<!--
+  Copyright 2021 Aaron Fenyes
+  
+  This file is part of Typomatic.
+  
+  Typomatic is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  
+  Typomatic is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="../web/typomatic.css"/>
+  <link rel="stylesheet" type="text/css" href="typomatic-app.css"/>
+  
+  <script type="text/javascript" src="rule.js"></script>
+  <script type="text/javascript" src="typomatic.js"></script>
+  <script>
+    var testRule = new Rule('oo\tx')
+  </script>
+  
+  <title>Typomatic</title>
+</head>
+
+<body>
+  <div class="control-bar">
+    <div class="control">
+      <label for="input">Input:</label>
+      <input type="text" id="input" onkeypress="inputKeyPress(event)"/>
+      <button onclick="loadInput()">Load</button>
+    </div>
+    <div class="control">
+      <button onclick="testRule.apply(document.getElementById('display'), 0, false)">
+        Test step
+      </button>
+    </div>
+    <div class="control">
+      <label for="tempo">Tempo:</label>
+      <span id="tempoDisp"></span>
+      <input type="range" id="tempo" min="60" max="480" step="60" value="240" oninput="setTempo()"/>
+    </div>
+  </div>
+  <div id="display"></div>
+</body>
+
+<script>
+loadInput()
+setTempo()
+</script>

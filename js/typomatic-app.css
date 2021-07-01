@@ -1,0 +1,43 @@
+#display {
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px;
+  font-size: 40px;
+  font-family: "Ubuntu Mono", Verdana, sans-serif;
+  color: #c0c0c0;
+  background-color: #202020;
+}
+
+#tempoDisp {
+  width: 60px;
+  text-align: right;
+  margin-right: 6px;
+}
+
+/* controls */
+
+.control-bar {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.control {
+  margin: 0 12px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.control > input {
+  margin-right: 6px;
+}
+
+.control > label {
+  margin-right: 6px;
+}
+
+.control:not(:first-child) {
+  border-left: 1px solid #a0a0a0;
+  padding-left: 12px;
+}
