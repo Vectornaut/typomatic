@@ -29,9 +29,6 @@
   
   <script type="text/javascript" src="rule.js"></script>
   <script type="text/javascript" src="typomatic.js"></script>
-  <script>
-    var testRule = new Rule('oo\tx')
-  </script>
   
   <title>Typomatic</title>
 </head>
@@ -44,7 +41,7 @@
       <input type="button" id="inputButton", value="Load"/>
     </div>
     <div class="control">
-      <input type="button" value="Test step" onclick="testRule.apply(document.getElementById('display'), 0, false)"/>
+      <input type="button" id="stepButton", value="Step"/>
     </div>
     <div class="control">
       <label for="tempoRange">Tempo:</label>
@@ -56,11 +53,13 @@
 </body>
 
 <script>
-new Typomatic(
+machine = new Typomatic(
   document.getElementById('display'),
   document.getElementById('inputField'),
   document.getElementById('inputButton'),
+  document.getElementById('stepButton'),
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp')
 )
+machine.rules.push(new Rule('oo\tx'))
 </script>

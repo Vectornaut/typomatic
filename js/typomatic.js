@@ -20,7 +20,21 @@ along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class Typomatic {
-  constructor(display, input, inputButton, tempo, tempoDisp) {
+  // gui
+  display
+  inputField
+  tempoRange
+  tempoDisp
+  
+  // settings
+  tempo
+  soundOn = false
+  
+  // data and instructions
+  str
+  rules = []
+  
+  constructor(display, input, inputButton, stepButton, tempo, tempoDisp) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
@@ -30,6 +44,7 @@ class Typomatic {
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
     inputButton.addEventListener('click', this.loadInput.bind(this))
+    stepButton.addEventListener('click', this.step.bind(this))
     tempo.addEventListener('input', this.setTempo.bind(this))
     
     // initialize display and tempo
@@ -42,11 +57,25 @@ class Typomatic {
   }
   
   loadInput() {
-    this.display.str = this.inputField.value
-    this.display.innerHTML = this.inputField.value
+    this.str = this.inputField.value
+    this.display.innerHTML = this.str
   }
   
   setTempo() {
-    this.tempoDisp.innerHTML = this.tempoRange.value + ' bpm'
+    this.tempo = this.tempoRange.value
+    this.tempoDisp.innerHTML = this.tempo + ' bpm'
+  }
+  
+  // carry out one execution step. return `true` if it's time to stop execution,
+  // and `false` otherwise
+  step() {
+    var i
+    for (i = 0; i < this.rules.length; i++) {
+      if (this.rules[i].apply(this)) {
+        /*[BUSY BEAVER] stepsRun++;*/
+        break;
+      }
+    }
+    return i == this.rules.length || this.rules[i].stop
   }
 }

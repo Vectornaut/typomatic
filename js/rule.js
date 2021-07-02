@@ -20,6 +20,10 @@ along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class Rule {
+  from
+  to
+  stop
+  
   constructor(code) {
     var tokens = code.split(/\s+/)
     if (tokens.length >= 1) this.from = tokens[0]; else this.from = ""
@@ -48,21 +52,19 @@ class Rule {
     }*/
   }
   
-  // if this rule can be applied to the string in the given display, apply it
-  // and return `true`. otherwise, return `false`. the display must have a
-  // `str` property that contains the working string
-  apply(display, tempo, soundOn) {
+  // if this rule can be applied to the machine's working string, apply it and
+  // return `true`. otherwise, return `false`
+  apply(machine) {
     // look for a substring matching this rule
-    var index = display.str.indexOf(this.from)
-    console.log(this.from + " --> " + this.to)
+    var index = machine.str.indexOf(this.from)
     if (index === -1) return false
     
     // if a matching substring is found, apply the rule
     /*[SOUND] if (soundOn && this.sound != null) [PLAY SOUND]*/
-    var pre = display.str.slice(0, index)
-    var post = display.str.slice(index + this.from.length)
+    var pre = machine.str.slice(0, index)
+    var post = machine.str.slice(index + this.from.length)
     /*[COLOR] display.innerHTML = pre + '<span class="' + this.color + "'>" + this.from + '</span>' + post*/
-    display.str = pre + this.to + post
-    display.innerHTML = display.str
+    machine.str = pre + this.to + post
+    machine.display.innerHTML = machine.str
   }
 }
