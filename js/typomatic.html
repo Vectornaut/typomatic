@@ -63,6 +63,11 @@ machine = new Typomatic(
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp')
 )
-machine.rules.push(new Rule('oo\tx'))
-/*[TEST] machine.rules.push(new Rule('oo\tx\t%'))*/
+machine.rules.push(new Rule('+\t'))
+colorKeys = 'poygbv'
+for (var i = 0; i < colorKeys.length; i++) {
+  key = colorKeys[i]
+  machine.rules.push(new Rule(`${key}\t\t\t\t${key}`))
+}
+machine.inputField.value = '+' + colorKeys
 </script>

@@ -16,6 +16,12 @@ body {
 }
 
 .white-highlight { color: white; }
+.pink-highlight { color: hsl(324, 100%, 50%); }
+.orange-highlight { color: hsl(36, 100%, 50%); }
+.yellow-highlight { color: hsl(60, 100%, 50%); }
+.green-highlight { color: hsl(120, 100%, 50%); }
+.blue-highlight { color: hsl(187.2, 100%, 50%); }
+.violet-highlight { color: hsl(288, 83%, 50%); }
 
 /* controls */
 
