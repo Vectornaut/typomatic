@@ -23,28 +23,35 @@ class Typomatic {
   // gui
   display
   inputField
+  playButton
   tempoRange
   tempoDisp
   
   // settings
-  tempo
+  period
   soundOn = false
   
   // data and instructions
   str
   rules = []
   
-  constructor(display, input, inputButton, stepButton, tempo, tempoDisp) {
+  // execution
+  stepInterval = null
+  stepping = false
+  
+  constructor(display, input, inputButton, stepButton, playButton, tempo, tempoDisp) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
+    this.playButton = playButton
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
     inputButton.addEventListener('click', this.loadInput.bind(this))
-    stepButton.addEventListener('click', this.step.bind(this))
+    stepButton.addEventListener('click', this.blockingStep.bind(this))
+    playButton.addEventListener('click', this.play.bind(this))
     tempo.addEventListener('input', this.setTempo.bind(this))
     
     // initialize display and tempo
@@ -62,20 +69,65 @@ class Typomatic {
   }
   
   setTempo() {
-    this.tempo = this.tempoRange.value
-    this.tempoDisp.innerHTML = this.tempo + ' bpm'
+    var tempo = this.tempoRange.value
+    this.period = Math.round(6e4/tempo)
+    this.tempoDisp.innerHTML = tempo + ' bpm'
   }
   
-  // carry out one execution step. return `true` if it's time to stop execution,
-  // and `false` otherwise
+  // carry out an execution step, and report whether execution is finished
   step() {
-    var i
-    for (i = 0; i < this.rules.length; i++) {
-      if (this.rules[i].apply(this)) {
-        /*[BUSY BEAVER] stepsRun++;*/
-        break;
+    for (var i = 0; i < this.rules.length; i++) {
+      var rule = this.rules[i]
+      if (rule.apply(this)) {
+        // stop execution iff the rule we just applied is a stopping rule
+        return rule.stop
       }
     }
-    return i == this.rules.length || this.rules[i].stop
+    return true // stop execution, since no rules apply
+  }
+  
+  // this wrapper for `step` won't run if it's already running
+  blockingStep() {
+    if (!this.stepping) {
+      this.stepping = true
+      var stop = this.step()
+      this.stepping = false
+      return stop
+    } else {
+      // don't stop execution, since we didn't get a chance to to step
+      return false
+    }
+  }
+  
+  // this wrapper for `blockingStep` stops execution if appropriate
+  stoppingStep() {
+    if (this.blockingStep()) this.stop()
+  }
+  
+  // try to start execution, and report whether we succeeded
+  play() {
+    if (this.stepInterval === null) {
+      this.stepInterval = setInterval(this.stoppingStep.bind(this), this.period)
+      this.playButton.classList.add('on')
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  // try to stop execution, and report whether we succeeded
+  stop() {
+    if (this.stepInterval !== null) {
+      clearInterval(this.stepInterval)
+      this.stepInterval = null
+      this.playButton.classList.remove('on')
+    } else {
+      return false
+    }
+  }
+  
+  // toggle execution
+  togglePlay() {
+    if (!this.play()) this.stop()
   }
 }

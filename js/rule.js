@@ -66,5 +66,6 @@ class Rule {
     /*[COLOR] display.innerHTML = pre + '<span class="' + this.color + "'>" + this.from + '</span>' + post*/
     machine.str = pre + this.to + post
     machine.display.innerHTML = machine.str
+    return true
   }
 }

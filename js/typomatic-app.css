@@ -38,7 +38,7 @@ input[type=button]:hover {
   background-color: #303030;
 }
 
-input[type=button]:active {
+input[type=button]:active, input[type=button].on {
   color: white;
   background-color: #404040;
   border-color: #676767;

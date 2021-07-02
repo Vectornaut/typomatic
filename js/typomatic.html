@@ -42,6 +42,7 @@
     </div>
     <div class="control">
       <input type="button" id="stepButton", value="Step"/>
+      <input type="button" id="playButton", value="Play"/>
     </div>
     <div class="control">
       <label for="tempoRange">Tempo:</label>
@@ -58,8 +59,10 @@ machine = new Typomatic(
   document.getElementById('inputField'),
   document.getElementById('inputButton'),
   document.getElementById('stepButton'),
+  document.getElementById('playButton'),
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp')
 )
 machine.rules.push(new Rule('oo\tx'))
+/*[TEST] machine.rules.push(new Rule('oo\tx\t%'))*/
 </script>
