@@ -41,12 +41,10 @@
     <div class="control">
       <label for="input">Input:</label>
       <input type="text" id="input" onkeypress="inputKeyPress(event)"/>
-      <button onclick="loadInput()">Load</button>
+      <input type="button" value="Load" onclick="loadInput()"/>
     </div>
     <div class="control">
-      <button onclick="testRule.apply(document.getElementById('display'), 0, false)">
-        Test step
-      </button>
+      <input type="button" value="Test step" onclick="testRule.apply(document.getElementById('display'), 0, false)"/>
     </div>
     <div class="control">
       <label for="tempo">Tempo:</label>
