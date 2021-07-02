@@ -19,18 +19,34 @@ along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-function inputKeyPress(event) {
-  if (event.keyCode === 13) loadInput()
-}
-
-function loadInput() {
-  var str = document.getElementById('input').value
-  var display = document.getElementById('display')
-  display.str = str
-  display.innerHTML = str
-}
-
-function setTempo() {
-  var tempo = document.getElementById('tempo').value
-  document.getElementById('tempoDisp').innerHTML = tempo + ' bpm'
+class Typomatic {
+  constructor(display, input, inputButton, tempo, tempoDisp) {
+    // store the controls we'll need later
+    this.display = display
+    this.inputField = inputField
+    this.tempoRange = tempoRange
+    this.tempoDisp = tempoDisp
+    
+    // set up event listeners
+    input.addEventListener('keypress', this.inputKeyPress.bind(this))
+    inputButton.addEventListener('click', this.loadInput.bind(this))
+    tempo.addEventListener('input', this.setTempo.bind(this))
+    
+    // initialize display and tempo
+    this.loadInput()
+    this.setTempo()
+  }
+  
+  inputKeyPress(event) {
+    if (event.keyCode === 13) this.loadInput()
+  }
+  
+  loadInput() {
+    this.display.str = this.inputField.value
+    this.display.innerHTML = this.inputField.value
+  }
+  
+  setTempo() {
+    this.tempoDisp.innerHTML = this.tempoRange.value + ' bpm'
+  }
 }

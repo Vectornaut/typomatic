@@ -40,22 +40,27 @@
   <div class="control-bar">
     <div class="control">
       <label for="input">Input:</label>
-      <input type="text" id="input" onkeypress="inputKeyPress(event)"/>
-      <input type="button" value="Load" onclick="loadInput()"/>
+      <input type="text" id="inputField"/>
+      <input type="button" id="inputButton", value="Load"/>
     </div>
     <div class="control">
       <input type="button" value="Test step" onclick="testRule.apply(document.getElementById('display'), 0, false)"/>
     </div>
     <div class="control">
-      <label for="tempo">Tempo:</label>
+      <label for="tempoRange">Tempo:</label>
       <span id="tempoDisp"></span>
-      <input type="range" id="tempo" min="60" max="480" step="60" value="240" oninput="setTempo()"/>
+      <input type="range" id="tempoRange" min="60" max="480" step="60" value="240"/>
     </div>
   </div>
   <div id="display"></div>
 </body>
 
 <script>
-loadInput()
-setTempo()
+new Typomatic(
+  document.getElementById('display'),
+  document.getElementById('inputField'),
+  document.getElementById('inputButton'),
+  document.getElementById('tempoRange'),
+  document.getElementById('tempoDisp')
+)
 </script>
