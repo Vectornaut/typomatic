@@ -3,6 +3,8 @@ body {
   color: #c0c0c0;
 }
 
+/* display */
+
 #display {
   height: 240px;
   display: flex;
@@ -13,13 +15,15 @@ body {
   font-family: "Ubuntu Mono", Verdana, sans-serif;
 }
 
+.white-highlight { color: white; }
+
+/* controls */
+
 #tempoDisp {
   width: 60px;
   text-align: right;
   margin-right: 6px;
 }
-
-/* controls */
 
 /*
 formatting tips from Stephanie Eckles
@@ -28,7 +32,7 @@ https://moderncss.dev/custom-css-styles-for-form-inputs-and-textareas/
 input {
   margin-right: 6px;
   background-color: #202020;
-  border: 1px solid #4d4d4d;
+  border: 1px solid hsl(0, 0%, 30%);
   border-radius: 4px;
   color: #c0c0c0;
   font-size: 11pt;
@@ -41,7 +45,7 @@ input[type=button]:hover {
 input[type=button]:active, input[type=button].on {
   color: white;
   background-color: #404040;
-  border-color: #676767;
+  border-color: hsl(0, 0%, 40%);
 }
 
 .control-bar {
@@ -64,6 +68,6 @@ input[type=button]:active, input[type=button].on {
 }
 
 .control:not(:first-child) {
-  border-left: 1px solid #4d4d4d;
+  border-left: 1px solid hsl(0, 0%, 30%);
   padding-left: 12px;
 }

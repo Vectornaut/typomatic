@@ -63,9 +63,9 @@ class Rule {
     /*[SOUND] if (soundOn && this.sound != null) [PLAY SOUND]*/
     var pre = machine.str.slice(0, index)
     var post = machine.str.slice(index + this.from.length)
-    /*[COLOR] display.innerHTML = pre + '<span class="' + this.color + "'>" + this.from + '</span>' + post*/
+    machine.display.innerHTML = `<span>${pre}<span class="white-highlight">${this.from}</span>${post}</span>`
     machine.str = pre + this.to + post
-    machine.display.innerHTML = machine.str
+    setTimeout(machine.updateDisplay.bind(machine), machine.halfPeriod)
     return true
   }
 }

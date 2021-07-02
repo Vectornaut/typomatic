@@ -29,6 +29,7 @@ class Typomatic {
   
   // settings
   period
+  halfPeriod
   soundOn = false
   
   // data and instructions
@@ -51,12 +52,16 @@ class Typomatic {
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
     inputButton.addEventListener('click', this.loadInput.bind(this))
     stepButton.addEventListener('click', this.blockingStep.bind(this))
-    playButton.addEventListener('click', this.play.bind(this))
+    playButton.addEventListener('click', this.togglePlay.bind(this))
     tempo.addEventListener('input', this.setTempo.bind(this))
     
     // initialize display and tempo
     this.loadInput()
     this.setTempo()
+  }
+  
+  updateDisplay() {
+    this.display.innerHTML = this.str
   }
   
   inputKeyPress(event) {
@@ -65,12 +70,13 @@ class Typomatic {
   
   loadInput() {
     this.str = this.inputField.value
-    this.display.innerHTML = this.str
+    this.updateDisplay()
   }
   
   setTempo() {
     var tempo = this.tempoRange.value
     this.period = Math.round(6e4/tempo)
+    this.halfPeriod = Math.round(3e4/tempo)
     this.tempoDisp.innerHTML = tempo + ' bpm'
   }
   
@@ -107,8 +113,12 @@ class Typomatic {
   // try to start execution, and report whether we succeeded
   play() {
     if (this.stepInterval === null) {
-      this.stepInterval = setInterval(this.stoppingStep.bind(this), this.period)
-      this.playButton.classList.add('on')
+      if (this.blockingStep()) { // execute the first step immediately
+        this.stop()
+      } else {
+        this.stepInterval = setInterval(this.stoppingStep.bind(this), this.period)
+        this.playButton.classList.add('on')
+      }
       return true
     } else {
       return false
