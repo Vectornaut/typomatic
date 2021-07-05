@@ -26,6 +26,7 @@ class Typomatic {
   playButton
   tempoRange
   tempoDisp
+  rulesArea
   
   // settings
   period
@@ -40,20 +41,22 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(display, input, inputButton, stepButton, playButton, tempo, tempoDisp) {
+  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, rulesButton) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
     this.playButton = playButton
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
+    this.rulesArea = rulesArea
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
     inputButton.addEventListener('click', this.loadInput.bind(this))
     stepButton.addEventListener('click', this.blockingStep.bind(this))
     playButton.addEventListener('click', this.togglePlay.bind(this))
-    tempo.addEventListener('input', this.setTempo.bind(this))
+    tempoRange.addEventListener('input', this.setTempo.bind(this))
+    rulesButton.addEventListener('click', this.loadRules.bind(this))
     
     // initialize display and tempo
     this.loadInput()
@@ -78,6 +81,19 @@ class Typomatic {
     this.period = Math.round(6e4/tempo)
     this.halfPeriod = Math.round(3e4/tempo)
     this.tempoDisp.innerHTML = tempo + ' bpm'
+  }
+  
+  loadRules() {
+    var freshRules = []
+    var lines = rulesArea.value.replace(/\r/g, '').split('\n')
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i]
+      if (line !== '' && !/^\s\s.*/.test(line)) {
+        freshRules.push(new Rule(line, this.resources))
+      }
+    }
+    this.rules = freshRules
+    console.log(`loaded ${this.rules.length} new rules`)
   }
   
   // carry out an execution step, and report whether execution is finished

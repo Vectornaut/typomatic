@@ -78,6 +78,7 @@ class Rule {
     var post = machine.str.slice(index + this.from.length)
     machine.display.innerHTML = `<span>${pre}<span class="${this.color}">${this.from}</span>${post}</span>`
     machine.str = pre + this.to + post
+    console.log(machine.str)
     setTimeout(machine.updateDisplay.bind(machine), machine.halfPeriod)
     return true
   }
