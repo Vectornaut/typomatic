@@ -24,6 +24,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
+  <link rel="stylesheet" type="text/css" href="../monorail.css" />
   <link rel="stylesheet" type="text/css" href="../web/typomatic.css"/>
   <link rel="stylesheet" type="text/css" href="typomatic-app.css"/>
   
@@ -35,6 +37,15 @@
 </head>
 
 <body>
+  <ul id="navstripe">
+  <li><a class="return" href="../seeing.html">&#8617;</a></li>
+  <li><a href="index.html">Hello</a></li>
+  <li><a href="introducing.html">Intro</a></li>
+  <li class="here"><a class="here" href="typomatic.html">Typomatic</a></li>
+  </ul>
+  
+  <div id="content">
+  
   <h1>Computation</h1>
   <div class="control-bar">
     <div class="control">
@@ -53,6 +64,7 @@
     </div>
   </div>
   <div id="display-area"><span id="display"></span></div>
+  
   <h1><label for="rulesArea">Rules</label></h1>
   <div class="control-bar">
     <div class="control">
@@ -65,6 +77,8 @@
   <div id="rulesContainer">
     <textarea id="rulesArea" rows="20"></textarea>
     <textarea id="msgArea" rows="20" readonly="true" disabled="true"></textarea><!-- disabled to deflect focus -->
+  </div>
+  
   </div>
 </body>
 

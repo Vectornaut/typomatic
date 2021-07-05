@@ -3,6 +3,42 @@ body {
   color: #c0c0c0;
 }
 
+/* stripe color */
+
+#masthead {
+	color: #c0c0c0;
+}
+
+#navstripe {
+	background-color: #c0c0c0;
+}
+
+ul#navstripe .here {
+	color: #c0c0c0;
+}
+
+ul#navstripe a:hover {
+	color: #c0c0c0;
+}
+
+em {
+	color: #c0c0c0;
+}
+
+/* navigation link background matching */
+
+ul#navstripe li:hover {
+	background-color: #202020;
+}
+
+ul#navstripe .here {
+	background-color: #202020;
+}
+
+ul#navstripe a {
+	color: #202020;
+}
+
 /* display */
 
 #display-area {
