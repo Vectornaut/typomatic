@@ -6,7 +6,7 @@ body {
 /* display */
 
 #display-area {
-  height: 240px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,7 +109,6 @@ input[type=button].error:hover {
 
 #rulesArea {
 	white-space: pre;
-	overflow-y: scroll;
   border-style: solid;
 	border-color: hsl(0, 0%, 30%);
   color: #c0c0c0;
