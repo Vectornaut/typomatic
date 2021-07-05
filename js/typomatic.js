@@ -28,9 +28,12 @@ class Typomatic {
   tempoDisp
   rulesArea
   
+  // resources
+  resources = new ResourceKit()
+  
   // settings
-  period
-  halfPeriod
+  beat
+  halfBeat
   soundOn = false
   
   // data and instructions
@@ -49,6 +52,7 @@ class Typomatic {
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
     this.rulesArea = rulesArea
+    this.rulesButton = rulesButton
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
@@ -64,7 +68,14 @@ class Typomatic {
   }
   
   updateDisplay() {
-    this.display.innerHTML = this.str
+    // clear the display
+    display = this.display
+    while (display.firstChild) {
+      display.removeChild(display.lastChild)
+    }
+    
+    // fill the display with the working string
+    display.appendChild(document.createTextNode(this.str))
   }
   
   inputKeyPress(event) {
@@ -78,8 +89,8 @@ class Typomatic {
   
   setTempo() {
     var tempo = this.tempoRange.value
-    this.period = Math.round(6e4/tempo)
-    this.halfPeriod = Math.round(3e4/tempo)
+    this.beat = Math.round(6e4/tempo)
+    this.halfBeat = Math.round(3e4/tempo)
     this.tempoDisp.innerHTML = tempo + ' bpm'
   }
   
@@ -132,7 +143,7 @@ class Typomatic {
       if (this.blockingStep()) { // execute the first step immediately
         this.stop()
       } else {
-        this.stepInterval = setInterval(this.stoppingStep.bind(this), this.period)
+        this.stepInterval = setInterval(this.stoppingStep.bind(this), this.beat)
         this.playButton.classList.add('on')
       }
       return true

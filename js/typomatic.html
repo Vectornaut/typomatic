@@ -27,6 +27,7 @@
   <link rel="stylesheet" type="text/css" href="../web/typomatic.css"/>
   <link rel="stylesheet" type="text/css" href="typomatic-app.css"/>
   
+  <script type="text/javascript" src="resource-kit.js"></script>
   <script type="text/javascript" src="rule.js"></script>
   <script type="text/javascript" src="typomatic.js"></script>
   
@@ -50,7 +51,7 @@
       <input type="range" id="tempoRange" min="60" max="480" step="60" value="240"/>
     </div>
   </div>
-  <div id="display"></div>
+  <div id="display-area"><span id="display"></span></div>
   <div>
     <div class="control-bar">
       <div class="control">
@@ -72,11 +73,11 @@ machine = new Typomatic(
   document.getElementById('rulesArea'),
   document.getElementById('rulesButton')
 )
-machine.rules.push(new Rule('+\t'))
+machine.rules.push(new Rule('+\t', machine.resources))
 colorKeys = 'poygbv'
 for (var i = 0; i < colorKeys.length; i++) {
   key = colorKeys[i]
-  machine.rules.push(new Rule(`${key}\t\t\t\t${key}`))
+  machine.rules.push(new Rule(`${key}\t\t\t\t${key}`, machine.resources))
 }
 machine.inputField.value = '+' + colorKeys
 </script>

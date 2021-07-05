@@ -24,27 +24,16 @@ class Rule {
   to
   stop
   
-  static stopDict = {
-    '': false,
-    '%': true
-  }
+  // sounds and colors
+  /*[SOUND] sound*/
+  color
   
-  static colorDict = {
-    '': 'white-highlight',
-    'p': 'pink-highlight',
-    'o': 'orange-highlight',
-    'y': 'yellow-highlight',
-    'g': 'green-highlight',
-    'b': 'blue-highlight',
-    'v': 'violet-highlight'
-  }
-  
-  constructor(code) {
-    var tokens = code.split(/\s/)
-    if (tokens.length >= 1) this.from = tokens[0]; else this.from = ""
-    if (tokens.length >= 2) this.to = tokens[1]; else this.to = ""
+  constructor(line, resources) {
+    var tokens = line.split(/\s/)
+    if (tokens.length >= 1) this.from = tokens[0]; else this.from = ''
+    if (tokens.length >= 2) this.to = tokens[1]; else this.to = ''
     if (tokens.length >= 3) {
-      if (tokens[2] in Rule.stopDict) this.stop = Rule.stopDict[tokens[2]]
+      if (tokens[2] in resources.stops) this.stop = resources.stops[tokens[2]]
       /*[EXCEPTION] else throw new InterpreterException(InterpreterException.BAD_STOP, tokens[2])*/
     } else {
       this.stop = false;
@@ -58,10 +47,10 @@ class Rule {
     }
     */
     if (tokens.length >= 5) {
-      if (tokens[4] in Rule.colorDict) this.color = Rule.colorDict[tokens[4]]
+      if (tokens[4] in resources.colors) this.color = resources.colors[tokens[4]]
       /*[EXCEPTION] else throw new InterpreterException(InterpreterException.BAD_COLOR, tokens[4])*/
     } else {
-      this.color = Rule.colorDict['']
+      this.color = resources.colors['']
     }
   }
   
@@ -72,14 +61,31 @@ class Rule {
     var index = machine.str.indexOf(this.from)
     if (index === -1) return false
     
-    // if a matching substring is found, apply the rule
+    // --- if a matching substring is found, apply the rule ---
+    
     /*[SOUND] if (soundOn && this.sound != null) [PLAY SOUND]*/
+    
+    // cut the working string before and after the match
     var pre = machine.str.slice(0, index)
     var post = machine.str.slice(index + this.from.length)
-    machine.display.innerHTML = `<span>${pre}<span class="${this.color}">${this.from}</span>${post}</span>`
+    
+    // clear the display and the color element
+    while (machine.display.firstChild) {
+      machine.display.removeChild(machine.display.lastChild)
+    }
+    if (this.color.firstChild) this.color.removeChild(this.color.lastChild)
+    
+    // highlight the match
+    machine.display.appendChild(document.createTextNode(pre))
+    this.color.appendChild(document.createTextNode(this.from))
+    machine.display.appendChild(this.color)
+    machine.display.appendChild(document.createTextNode(post))
+    
+    // replace the match in the working string, and update the display after
+    // half a beat
     machine.str = pre + this.to + post
     console.log(machine.str)
-    setTimeout(machine.updateDisplay.bind(machine), machine.halfPeriod)
+    setTimeout(machine.updateDisplay.bind(machine), machine.halfBeat)
     return true
   }
 }
