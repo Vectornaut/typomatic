@@ -62,6 +62,11 @@ input[type=button]:active, input[type=button].on {
   border-color: hsl(0, 0%, 40%);
 }
 
+input[type=button]:disabled {
+	color: hsl(0, 0%, 30%);
+	background-color: inherit;
+}
+
 .control-bar {
   display: flex;
   margin-bottom: 6px;

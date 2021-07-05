@@ -27,6 +27,8 @@ class Typomatic {
   tempoRange
   tempoDisp
   rulesArea
+  rulesButton
+  code
   
   // resources
   resources = new ResourceKit()
@@ -52,6 +54,7 @@ class Typomatic {
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
     this.rulesArea = rulesArea
+    this.rulesButton = rulesButton
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
@@ -59,6 +62,7 @@ class Typomatic {
     stepButton.addEventListener('click', this.blockingStep.bind(this))
     playButton.addEventListener('click', this.togglePlay.bind(this))
     tempoRange.addEventListener('input', this.setTempo.bind(this))
+    rulesArea.addEventListener('input', this.compareCode.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
     tabButton.addEventListener('click', this.insertTab.bind(this))
     
@@ -94,6 +98,10 @@ class Typomatic {
     this.tempoDisp.innerHTML = tempo + ' bpm'
   }
   
+  compareCode() {
+    this.rulesButton.disabled = this.rulesArea.value === this.code
+  }
+  
   loadRules() {
     var freshRules = []
     var lines = rulesArea.value.replace(/\r/g, '').split('\n')
@@ -105,6 +113,10 @@ class Typomatic {
     }
     this.rules = freshRules
     console.log(`loaded ${this.rules.length} new rules`)
+    
+    // save code for comparison
+    this.code = rulesArea.value
+    this.rulesButton.disabled = true
   }
   
   // hat tip StackOverflow user kasdega
@@ -126,6 +138,9 @@ class Typomatic {
     // reposition caret
     this.rulesArea.selectionStart = start + 1
     this.rulesArea.selectionEnd = start + 1
+    
+    // compare code
+    this.compareCode()
   }
   
   // carry out an execution step, and report whether execution is finished
