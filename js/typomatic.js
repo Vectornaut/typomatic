@@ -104,19 +104,27 @@ class Typomatic {
   
   loadRules() {
     var freshRules = []
+    var success = true
     var lines = rulesArea.value.replace(/\r/g, '').split('\n')
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
-      if (line !== '' && !/^\s\s.*/.test(line)) {
-        freshRules.push(new Rule(line, this.resources))
+      try {
+        if (line !== '' && !/^\s\s.*/.test(line)) {
+          freshRules.push(new Rule(line, this.resources))
+        }
+      } catch (errorMsg) {
+        console.log(`Line ${i}: ${errorMsg}`)
+        success = false
       }
     }
-    this.rules = freshRules
-    console.log(`loaded ${this.rules.length} new rules`)
-    
-    // save code for comparison
-    this.code = rulesArea.value
-    this.rulesButton.disabled = this.rulesArea.value.length < 10000
+    if (success) {
+      this.rules = freshRules
+      console.log(`loaded ${this.rules.length} new rules`)
+      
+      // save code for comparison
+      this.code = rulesArea.value
+      this.rulesButton.disabled = this.rulesArea.value.length < 10000
+    }
   }
   
   // hat tip StackOverflow user kasdega

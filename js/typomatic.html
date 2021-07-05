@@ -77,11 +77,4 @@ machine = new Typomatic(
   document.getElementById('rulesButton'),
   document.getElementById('tabButton'),
 )
-machine.rules.push(new Rule('+\t', machine.resources))
-colorKeys = 'poygbv'
-for (var i = 0; i < colorKeys.length; i++) {
-  key = colorKeys[i]
-  machine.rules.push(new Rule(`${key}\t\t\t\t${key}`, machine.resources))
-}
-machine.inputField.value = '+' + colorKeys
 </script>

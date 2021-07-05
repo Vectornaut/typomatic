@@ -34,7 +34,7 @@ class Rule {
     if (tokens.length >= 2) this.to = tokens[1]; else this.to = ''
     if (tokens.length >= 3) {
       if (tokens[2] in resources.stops) this.stop = resources.stops[tokens[2]]
-      /*[EXCEPTION] else throw new InterpreterException(InterpreterException.BAD_STOP, tokens[2])*/
+      else throw `"${tokens[2]}" is not the stop symbol, "%"`
     } else {
       this.stop = false;
     }
@@ -48,7 +48,7 @@ class Rule {
     */
     if (tokens.length >= 5) {
       if (tokens[4] in resources.colors) this.color = resources.colors[tokens[4]]
-      /*[EXCEPTION] else throw new InterpreterException(InterpreterException.BAD_COLOR, tokens[4])*/
+      else throw `"${tokens[4]}" is not a valid color name`
     } else {
       this.color = resources.colors['']
     }
