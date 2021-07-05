@@ -99,7 +99,7 @@ class Typomatic {
   }
   
   compareCode() {
-    this.rulesButton.disabled = this.rulesArea.value === this.code
+    this.rulesButton.disabled = this.rulesArea.value.length < 10000 && this.rulesArea.value === this.code
   }
   
   loadRules() {
@@ -116,7 +116,7 @@ class Typomatic {
     
     // save code for comparison
     this.code = rulesArea.value
-    this.rulesButton.disabled = true
+    this.rulesButton.disabled = this.rulesArea.value.length < 10000
   }
   
   // hat tip StackOverflow user kasdega
