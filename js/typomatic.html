@@ -35,6 +35,7 @@
 </head>
 
 <body>
+  <h1>Computation</h1>
   <div class="control-bar">
     <div class="control">
       <label for="input">Input:</label>
@@ -52,16 +53,16 @@
     </div>
   </div>
   <div id="display-area"><span id="display"></span></div>
-  <div>
-    <div class="control-bar">
-      <div class="control">
-        <input type="button" id="rulesButton" value="Load rules"/>
-      </div>
-      <div class="control">
-        <input type="button" id="tabButton" value="Tab"/>
-      </div>
+  <h1><label for="rulesArea">Rules</label></h1>
+  <div class="control-bar">
+    <div class="control">
+      <input type="button" id="rulesButton" value="Load rules"/>
     </div>
-    <textarea id="rulesArea"></textarea>
+    <div class="control">
+      <input type="button" id="tabButton" value="Tab"/>
+    </div>
+  </div>
+  <textarea id="rulesArea"></textarea>
 </body>
 
 <script>
