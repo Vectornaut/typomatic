@@ -44,7 +44,7 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, rulesButton) {
+  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, rulesButton, tabButton) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
@@ -52,7 +52,6 @@ class Typomatic {
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
     this.rulesArea = rulesArea
-    this.rulesButton = rulesButton
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
@@ -61,6 +60,7 @@ class Typomatic {
     playButton.addEventListener('click', this.togglePlay.bind(this))
     tempoRange.addEventListener('input', this.setTempo.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
+    tabButton.addEventListener('click', this.insertTab.bind(this))
     
     // initialize display and tempo
     this.loadInput()
@@ -105,6 +105,27 @@ class Typomatic {
     }
     this.rules = freshRules
     console.log(`loaded ${this.rules.length} new rules`)
+  }
+  
+  // hat tip StackOverflow user kasdega
+  // https://stackoverflow.com/a/6637396/1644283
+  insertTab(event) {
+    // refocus on rules area
+    this.rulesArea.focus()
+    
+    // get selection
+    var code = this.rulesArea.value
+    var start = this.rulesArea.selectionStart
+    var end = this.rulesArea.selectionEnd
+    
+    // replace selection with tab
+    var pre = code.slice(0, start)
+    var post = code.slice(end)
+    this.rulesArea.value = pre + '\t' + post
+    
+    // reposition caret
+    this.rulesArea.selectionStart = start + 1
+    this.rulesArea.selectionEnd = start + 1
   }
   
   // carry out an execution step, and report whether execution is finished

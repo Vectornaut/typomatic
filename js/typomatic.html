@@ -57,6 +57,9 @@
       <div class="control">
         <input type="button" id="rulesButton", value="Load rules"/>
       </div>
+      <div class="control">
+        <input type="button" id="tabButton", value="Tab"/>
+      </div>
     </div>
     <textarea id="rulesArea"></textarea>
 </body>
@@ -71,7 +74,8 @@ machine = new Typomatic(
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp'),
   document.getElementById('rulesArea'),
-  document.getElementById('rulesButton')
+  document.getElementById('rulesButton'),
+  document.getElementById('tabButton'),
 )
 machine.rules.push(new Rule('+\t', machine.resources))
 colorKeys = 'poygbv'
