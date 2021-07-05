@@ -27,6 +27,7 @@ class Typomatic {
   tempoRange
   tempoDisp
   rulesArea
+  msgArea
   rulesButton
   code
   
@@ -46,7 +47,7 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, rulesButton, tabButton) {
+  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, msgArea, rulesButton, tabButton) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
@@ -54,6 +55,7 @@ class Typomatic {
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
     this.rulesArea = rulesArea
+    this.msgArea = msgArea
     this.rulesButton = rulesButton
     
     // set up event listeners
@@ -63,6 +65,7 @@ class Typomatic {
     playButton.addEventListener('click', this.togglePlay.bind(this))
     tempoRange.addEventListener('input', this.setTempo.bind(this))
     rulesArea.addEventListener('input', this.compareCode.bind(this))
+    rulesArea.addEventListener('scroll', this.syncMsgs.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
     tabButton.addEventListener('click', this.insertTab.bind(this))
     
@@ -102,10 +105,18 @@ class Typomatic {
     this.rulesButton.disabled = this.rulesArea.value.length < 10000 && this.rulesArea.value === this.code
   }
   
+  syncMsgs() {
+    this.msgArea.scrollTop = this.rulesArea.scrollTop
+  }
+  
   loadRules() {
+    // save code for comparison
+    this.code = rulesArea.value
+    
     var freshRules = []
     var success = true
     var lines = rulesArea.value.replace(/\r/g, '').split('\n')
+    this.msgArea.value = ''
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
       try {
@@ -113,17 +124,23 @@ class Typomatic {
           freshRules.push(new Rule(line, this.resources))
         }
       } catch (errorMsg) {
-        console.log(`Line ${i}: ${errorMsg}`)
+        this.msgArea.value += errorMsg
         success = false
       }
+      this.msgArea.value += '\n'
     }
     if (success) {
+      // set rules
       this.rules = freshRules
       console.log(`loaded ${this.rules.length} new rules`)
       
-      // save code for comparison
-      this.code = rulesArea.value
+      // update GUI
       this.rulesButton.disabled = this.rulesArea.value.length < 10000
+      this.rulesButton.classList.remove('error')
+      this.msgArea.classList.remove('error')
+    } else {
+      this.rulesButton.classList.add('error')
+      this.msgArea.classList.add('error')
     }
   }
   

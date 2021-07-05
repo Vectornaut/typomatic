@@ -31,15 +31,6 @@ body {
   margin-right: 6px;
 }
 
-#rulesArea {
-	width: 100%;
-	white-space: pre;
-	background-color: #202020;
-  border: 1px solid hsl(0, 0%, 30%);
-  border-radius: 4px;
-  color: #c0c0c0;
-}
-
 /*
 formatting tips from Stephanie Eckles
 https://moderncss.dev/custom-css-styles-for-form-inputs-and-textareas/
@@ -68,6 +59,15 @@ input[type=button]:disabled {
 	border-color: hsl(0, 0%, 30%);
 }
 
+input[type=button].error {
+	border-color: hsl(324, 100%, 20%);
+	color: hsl(324, 100%, 50%);
+}
+
+input[type=button].error:hover {
+	background-color: hsl(324, 100%, 10%);
+}
+
 .control-bar {
   display: flex;
   margin-bottom: 6px;
@@ -90,4 +90,38 @@ input[type=button]:disabled {
 .control:not(:first-child) {
   border-left: 1px solid hsl(0, 0%, 30%);
   padding-left: 12px;
+}
+
+/* rules */
+
+#rulesContainer {
+	display: flex;
+	gap: 12px;
+	width: 100%;
+}
+
+#rulesContainer > textarea {
+	flex-grow: 1;
+	border-width: 1px;
+	border-radius: 4px;
+	background-color: #202020;
+}
+
+#rulesArea {
+	white-space: pre;
+	overflow-y: scroll;
+  border-style: solid;
+	border-color: hsl(0, 0%, 30%);
+  color: #c0c0c0;
+}
+
+#msgArea {
+	overflow: hidden;
+	border-style: none;
+	color: hsl(324, 100%, 50%);
+}
+
+#msgArea.error {
+	border-style: solid;
+	border-color: hsl(324, 100%, 20%);
 }

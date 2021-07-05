@@ -62,7 +62,10 @@
       <input type="button" id="tabButton" value="Tab"/>
     </div>
   </div>
-  <textarea id="rulesArea"></textarea>
+  <div id="rulesContainer">
+    <textarea id="rulesArea"></textarea>
+    <textarea id="msgArea" readonly="true" disabled="true"></textarea><!-- disabled to deflect focus -->
+  </div>
 </body>
 
 <script>
@@ -75,7 +78,8 @@ machine = new Typomatic(
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp'),
   document.getElementById('rulesArea'),
+  document.getElementById('msgArea'),
   document.getElementById('rulesButton'),
-  document.getElementById('tabButton'),
+  document.getElementById('tabButton')
 )
 </script>
