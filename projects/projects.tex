@@ -118,7 +118,7 @@ $n$ & $F_n$ \\
 5 & \str{-|--|-|--|--|}
 \end{tabular}
 \end{center}
-Just as this table might lead you to suspect, each Fibonacci string is the beginning of the next one. That means there's an infinite string $F_\infty$ that each Fibonacci word is the beginning of.
+Just as this table might lead you to suspect, each Fibonacci string is the beginning of the next one. That means there's an infinite string $F_\infty$ that each Fibonacci string is the beginning of.
 
 You can turn $F_n$ into $F_{n + 1}$ using the substitution
 \begin{itemize}
@@ -127,7 +127,7 @@ You can turn $F_n$ into $F_{n + 1}$ using the substitution
 \end{itemize}
 Doing this substitution on $F_\infty$ gives you back $F_\infty$.
 
-Write a program that shows you longer and longer pieces of the infinite Fibonacci word as it runs.
+Write a program that shows you longer and longer pieces of the infinite Fibonacci string as it runs.
 \writeit
 Take a strip of paper and fold it in half over and over, always folding in the same direction. Then, open each crease out into a $90^\circ$ corner, keeping the natural direction of the crease. The shape you end up with is called a {\em dragon curve}.
 
@@ -275,7 +275,7 @@ A {\em finite state machine} is a simple creature that eats up a string of symbo
 
 Given a finite state machine, can you systematically build a Markov algorithm that does the same computation? What about vice versa?
 \proveit
-A finite state machine doesn't have a very good memory; its current state is all it knows about the past. Let's help it out by giving it a place to write things down. We'll make it a notebook with an infinite number of pages, so it can turn them to the right or to the left as many times as it wants without running out. 
+A finite state machine doesn't have a very good memory; its current state is all it knows about the past. Let's help it out by giving it a place to write things down. We'll make it a notebook with an infinite number of pages, so it can turn them to the right or to the left as many times as it wants without running out.
 
 Each page of the notebook can hold one symbol; for simplicity, we'll say a blank page holds ``the blank symbol.'' Instead of having us feed it symbols, the machine eats symbols off the pages of the notebook. When the finite state machine eats a symbol, it doesn't just go to a new state; it can also write a symbol on the page it's currently looking at, and then it can turn the page in either direction. Like before, what the machine does is determied by its current state and the symbol it just ate.
 
