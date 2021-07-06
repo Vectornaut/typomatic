@@ -63,7 +63,8 @@ class Typomatic {
     inputButton.addEventListener('click', this.loadInput.bind(this))
     stepButton.addEventListener('click', this.blockingStep.bind(this))
     playButton.addEventListener('click', this.togglePlay.bind(this))
-    tempoRange.addEventListener('input', this.setTempo.bind(this))
+    tempoRange.addEventListener('input', this.showTempo.bind(this))
+    tempoRange.addEventListener('change', this.changeTempo.bind(this))
     ruleEditor.addEventListener('input', this.compareCode.bind(this))
     ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
@@ -71,7 +72,8 @@ class Typomatic {
     
     // initialize display and tempo
     this.loadInput()
-    this.setTempo()
+    this.showTempo()
+    this.changeTempo()
   }
   
   updateDisplay() {
@@ -94,11 +96,18 @@ class Typomatic {
     this.updateDisplay()
   }
   
-  setTempo() {
+  showTempo() {
+    console.log('show tempo')
+    this.tempoDisp.innerHTML = this.tempoRange.value + ' bpm'
+  }
+  
+  changeTempo() {
+    console.log('change tempo')
+    var playing = this.stop(false)
     var tempo = this.tempoRange.value
     this.beat = Math.round(6e4/tempo)
     this.halfBeat = Math.round(3e4/tempo)
-    this.tempoDisp.innerHTML = tempo + ' bpm'
+    if (playing) this.play(false)
   }
   
   compareCode() {
@@ -199,13 +208,13 @@ class Typomatic {
   }
   
   // try to start execution, and report whether we succeeded
-  play() {
+  play(show = true) {
     if (this.stepInterval === null) {
-      if (this.blockingStep()) { // execute the first step immediately
+      if (show && this.blockingStep()) { // if `show`, execute the first step immediately
         this.stop()
       } else {
         this.stepInterval = setInterval(this.stoppingStep.bind(this), this.beat)
-        this.playButton.classList.add('pressed')
+        if (show) this.playButton.classList.add('pressed')
       }
       return true
     } else {
@@ -214,11 +223,12 @@ class Typomatic {
   }
   
   // try to stop execution, and report whether we succeeded
-  stop() {
+  stop(show = true) {
     if (this.stepInterval !== null) {
       clearInterval(this.stepInterval)
       this.stepInterval = null
-      this.playButton.classList.remove('pressed')
+      if (show) this.playButton.classList.remove('pressed')
+      return true
     } else {
       return false
     }
