@@ -35,13 +35,14 @@
 \section*{\textit{Key}}
 \begin{itemize}
 \note Here's a thing you should know.
-\writeit Write a computer to do this.
-\proveit Can you write a computer to do this?
+\writeit Write a program to do this.
+\proveit Can you write a program to do this?
 \thinkit Think about this.
 \end{itemize}
+
 \section*{Arithmetic}
 \begin{itemize}
-\note When I say a computer is supposed to input or output a number, with no other details, I generally mean for the number to be represented as a tally, like this:
+\note Representing a number by a tally means representing it like this:
 \begin{center}
 \begin{tabular}{rl}
 1 & \str{o} \\
@@ -50,62 +51,83 @@
 4 & \str{oooo}
 \end{tabular}
 \end{center}
-Of course, any symbol will work just as well as \str{o}!
+Of course, any symbol will work just as well as \str{o}.
 \end{itemize}
 \subsection*{Products}
 \begin{itemize}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & Two numbers \\
-\spec{out} & The product of the numbers
+\spec{in} & Two numbers (as tallies) \\
+\spec{out} & The product of the numbers (as a tally)
 \end{tabular}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & A number \\
-\spec{out} & The square of the number
+\spec{in} & A number (as a tally) \\
+\spec{out} & The square of the number (as a tally)
 \end{tabular}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & A number $n$ \\
-\spec{out} & The sum of the numbers from $1$ to $n$
+\spec{in} & A number $n$ (as a tally) \\
+\spec{out} & The sum of the numbers from $1$ to $n$ (as a tally)
 \end{tabular}
 \end{itemize}
 \subsection*{Remainders}
 \begin{itemize}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & A number \\
-\spec{out} & The number's remainder when divided by five
+\spec{in} & A number (as a tally) \\
+\spec{out} & The number's remainder when divided by five (as a tally)
 \end{tabular}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & Two numbers \\
-\spec{out} & The first number's remainder when divided by the second
+\spec{in} & Two numbers (as tallies) \\
+\spec{out} & The first number's remainder when divided by the second (as a tally)
 \end{tabular}
 \writeit
 The {\em Euclidean algorithm} is a method for finding the greatest common divisor of two numbers. It works like this.
 
 Start with a pair of numbers. Subtract the smaller number from the larger number (if the numbers are equal, subtract either one from the other). Now you have a new pair of numbers. Keep subtracting the smaller from the larger until one of the numbers is gone. The remaining number is the greatest common divisor of the numbers you started with.
 
-Write a computer that finds the greatest common divisor of two numbers.
-\writeit Write a computer that takes in a number $n$ and a string of bars, and turns every $n$th bar into a dot.
+Write a program that finds the greatest common divisor of two numbers (represented as tallies).
+\writeit Write a program that takes in a number $n$ (as a tally) and a string of bars, and turns every $n$th bar into a dot.
 \writeit
 \begin{tabularx}{\textwidth}{rX}
-\spec{in} & A number \\
+\spec{in} & A number (as a tally) \\
 \spec{out} & The empty string if the number is prime \newline A non-empty string otherwise
 \end{tabularx}
 \end{itemize}
-\subsection*{Sequences}
+\section*{Sequences}
+\subsection*{... of symbols}
 \begin{itemize}
-\writeit Write a computer that will show you all the numbers, one by one.
-\writeit Write a computer that will show you all the Fibonacci numbers, one by one.
-\writeit Write a computer that will show you all the prime numbers, one by one.
 \writeit
-Write a computer that churns out the never-ending string
+The {\em Fibonacci strings} are the strings $F_0, F_1, F_2, \ldots$ in the alphabet $\str{-}$, $\str{|}$, built up recursively according to the following rules:
+\begin{itemize}
+\item[] $F_0 =$ \str{-}
+\item[] $F_1 =$ \str{|-}
+\item[] $F_{n + 1} = F_n F_{n - 1}$
+\end{itemize}
+The first few look like this:
 \begin{center}
-\str{o\_oo\_ooo\_oooo\_ooooo\_oooooo\_}\quad\ldots
+\begin{tabular}{rl}
+$n$ & $F_n$ \\
+0 & \str{-} \\
+1 & \str{-|} \\
+2 & \str{-|-} \\
+3 & \str{-|--|} \\
+4 & \str{-|--|-|-} \\
+5 & \str{-|--|-|--|--|}
+\end{tabular}
 \end{center}
-(the ellipsis isn't part of the string).
+Just as this table might lead you to suspect, each Fibonacci string is the beginning of the next one. That means there's an infinite string $F_\infty$ that each Fibonacci word is the beginning of.
+
+You can turn $F_n$ into $F_{n + 1}$ using the substitution
+\begin{itemize}
+\item[] \str{-} $\mapsto$ \str{-|}
+\item[] \str{|} $\mapsto$ \str{-}
+\end{itemize}
+Doing this substitution on $F_\infty$ gives you back $F_\infty$.
+
+Write a program that shows you longer and longer pieces of the infinite Fibonacci word as it runs.
 \writeit
 Take a strip of paper and fold it in half over and over, always folding in the same direction. Then, open each crease out into a $90^\circ$ corner, keeping the natural direction of the crease. The shape you end up with is called a {\em dragon curve}.
 
@@ -113,22 +135,35 @@ Folding paper over and over gets difficult really quickly. It would be much easi
 
 Write a computer that will show you all the folding sequences for dragon curves.
 \end{itemize}
+\subsection*{... of numbers}
+\begin{itemize}
+\writeit Write a program that will show you all the numbers (as tallies), one by one.
+\writeit Write a program that will show you all the Fibonacci numbers (as tallies), one by one.
+\writeit Write a program that will show you all the prime numbers (as tallies), one by one.
+\writeit
+Write a computer that churns out the never-ending string
+\begin{center}
+\str{o\_oo\_ooo\_oooo\_ooooo\_oooooo\_}\quad\ldots
+\end{center}
+(the ellipsis isn't part of the string).
+\end{itemize}
+\section*{Coding}
 \subsection*{Digits}
 \begin{itemize}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & A number in binary \\
+\spec{in} & A number (in binary) \\
 \spec{out} & The number (as a tally)
 \end{tabular}
 \writeit
 \begin{tabular}{rl}
 \spec{in} & A number (as a tally) \\
-\spec{out} & The number in binary
+\spec{out} & The number (in binary)
 \end{tabular}
 \writeit
 \begin{tabular}{rl}
-\spec{in} & A number in binary \\
-\spec{out} & The number in trinary
+\spec{in} & A number (in binary) \\
+\spec{out} & The number (in trinary)
 \end{tabular}
 \writeit
 In the Maya number system, numbers up to nineteen are written as tallies, like this:
@@ -165,7 +200,7 @@ Tipping Maya numerals on their sides gives a nice way to write them as strings:
 \rmaya{904:905:905:905} \rmaya{900} \rmaya{905:905} & \str{|||....\~{}@\~{}||}
 \end{tabular}
 \end{center}
-Write a computer that turns numbers (in whatever form you want) into Maya numerals.
+Write a program that turns numbers (in whatever form you want) into Maya numerals.
 \end{itemize}
 \section*{Parsing}
 \begin{itemize}
@@ -180,9 +215,10 @@ Write a computer that turns numbers (in whatever form you want) into Maya numera
 \spec{out} & The value of the expression
 \end{tabular}
 \end{itemize}
+% ------------- revisions end here -------------
 \section*{Computation}
 \begin{itemize}
-\note In this section, we'll be talking about lots of different kinds of computers, so I'll refer to the ones we've been writing as ``Markov algorithms'' instead of just ``computers.''
+\note In this section, we'll be talking about lots of different kinds of programs, so I'll refer to the ones we've been writing as ``Markov algorithms'' instead of just ``programs.''
 \end{itemize}
 \subsection*{Computer architecture}
 \begin{itemize}
@@ -218,27 +254,12 @@ If the answer to the previous question is ``yes,'' can you automate the process?
 \end{tabular}
 \proveit Can you come up with a language that can't be recognized by any Markov algorithm?
 \end{itemize}
-\subsection*{Busy beavers}
-\begin{itemize}
-\proveit Let's say the ``size'' of a Markov algorithm is the total number of symbols used to specify the rules. For example, the algorithm
-\begin{center}
-\begin{tabular}{ll}
-\str{+\textless} & \str{\textless +} \\
-\str{o\textless} & \str{\textless +o} \\
-\str{\textless} \\
-\str{o}
-\end{tabular}
-\end{center}
-has size 11.
-
-If a size-1 Markov algorithm eventually stops, how many steps can it run before stopping, given a 1-symbol input? What about a size-2 algorithm? A size-3 algorithm? A size-$n$ algorithm?
-\end{itemize}
 \subsection*{Halting}
 \begin{itemize}
 \writeit Pick a number. If it's even, divide it by two. If it's odd, multiply it by three and add one. Now you have a new number. Keep doing this until you reach one.
 
-Pretty tedious, isn't it? Write a computer to do it for you!
-\proveit Can you write a computer that looks at the rules and input of any computer and tells you whether the computer will eventually stop running when it's given the specified input?
+Pretty tedious, isn't it? Write a program to do it for you!
+\proveit Can you write a program that looks at the rules and input of any program and tells you whether the program will eventually stop running when it's given the specified input?
 \end{itemize}
 \subsection*{Emulation}
 \begin{itemize}
@@ -272,7 +293,7 @@ in the group
 \[ \langle a, b \mid ab^2a^{-1}b^{-3}, ba^2b^{-1}a^{-3} \rangle \]
 represents the identity?)
 
-To figure out whether two words represent the same group element, it's enough to be able to figure out whether a given word represents the identity. I'll call a computer that does this an ``identity recognizer.'' To keep things focused, let's say an identity recognizer has to act like this:
+To figure out whether two words represent the same group element, it's enough to be able to figure out whether a given word represents the identity. I'll call a program that does this an ``identity recognizer.'' To keep things focused, let's say an identity recognizer has to act like this:
 
 \begin{tabularx}{\textwidth}{rX}
 \spec{in} & A word \\
