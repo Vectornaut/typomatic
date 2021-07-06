@@ -83,7 +83,7 @@ input[type=button]:hover {
   background-color: #303030;
 }
 
-input[type=button]:active, input[type=button].on {
+input[type=button]:active, input[type=button].pressed {
   color: white;
   background-color: #404040;
   border-color: hsl(0, 0%, 40%);
@@ -95,13 +95,18 @@ input[type=button]:disabled {
 	border-color: hsl(0, 0%, 30%);
 }
 
-input[type=button].error {
+input[type=button].error:not(:disabled) {
 	border-color: hsl(324, 100%, 20%);
 	color: hsl(324, 100%, 50%);
 }
 
-input[type=button].error:hover {
+input[type=button].error:not(:disabled):hover {
 	background-color: hsl(324, 100%, 10%);
+}
+
+input[type=button].error:not(:disabled):active {
+	border-color: hsl(324, 100%, 30%);
+	background-color: hsl(324, 100%, 15%);
 }
 
 .control-bar {

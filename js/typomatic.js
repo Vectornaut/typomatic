@@ -110,9 +110,6 @@ class Typomatic {
   }
   
   loadRules() {
-    // save code for comparison
-    this.code = rulesArea.value
-    
     var freshRules = []
     var success = true
     var lines = rulesArea.value.replace(/\r/g, '').split('\n')
@@ -133,6 +130,9 @@ class Typomatic {
       // set rules
       this.rules = freshRules
       console.log(`loaded ${this.rules.length} new rules`)
+      
+      // save code for comparison
+      this.code = rulesArea.value
       
       // update GUI
       this.rulesButton.disabled = true
@@ -205,7 +205,7 @@ class Typomatic {
         this.stop()
       } else {
         this.stepInterval = setInterval(this.stoppingStep.bind(this), this.beat)
-        this.playButton.classList.add('on')
+        this.playButton.classList.add('pressed')
       }
       return true
     } else {
@@ -218,7 +218,7 @@ class Typomatic {
     if (this.stepInterval !== null) {
       clearInterval(this.stepInterval)
       this.stepInterval = null
-      this.playButton.classList.remove('on')
+      this.playButton.classList.remove('pressed')
     } else {
       return false
     }
