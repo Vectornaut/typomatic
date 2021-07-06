@@ -135,20 +135,20 @@ input[type=button].error:not(:disabled):active {
 
 /* rules */
 
-#rulesContainer {
+#ruleContainer {
 	display: flex;
 	gap: 12px;
 	width: 100%;
 }
 
-#rulesContainer > textarea {
+#ruleContainer > textarea {
 	flex-grow: 1;
 	border-width: 1px;
 	border-radius: 4px;
 	background-color: #202020;
 }
 
-#rulesArea {
+#ruleEditor {
 	white-space: pre;
   border-style: solid;
 	border-color: hsl(0, 0%, 30%);

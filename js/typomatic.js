@@ -26,7 +26,7 @@ class Typomatic {
   playButton
   tempoRange
   tempoDisp
-  rulesArea
+  ruleEditor
   msgArea
   rulesButton
   code
@@ -47,14 +47,14 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, rulesArea, msgArea, rulesButton, tabButton) {
+  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, ruleEditor, msgArea, rulesButton, tabButton) {
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
     this.playButton = playButton
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
-    this.rulesArea = rulesArea
+    this.ruleEditor = ruleEditor
     this.msgArea = msgArea
     this.rulesButton = rulesButton
     
@@ -64,8 +64,8 @@ class Typomatic {
     stepButton.addEventListener('click', this.blockingStep.bind(this))
     playButton.addEventListener('click', this.togglePlay.bind(this))
     tempoRange.addEventListener('input', this.setTempo.bind(this))
-    rulesArea.addEventListener('input', this.compareCode.bind(this))
-    rulesArea.addEventListener('scroll', this.syncMsgs.bind(this))
+    ruleEditor.addEventListener('input', this.compareCode.bind(this))
+    ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
     tabButton.addEventListener('click', this.insertTab.bind(this))
     
@@ -102,17 +102,17 @@ class Typomatic {
   }
   
   compareCode() {
-    this.rulesButton.disabled = this.rulesArea.value.length < 10000 && this.rulesArea.value === this.code
+    this.rulesButton.disabled = this.ruleEditor.value.length < 10000 && this.ruleEditor.value === this.code
   }
   
   syncMsgs() {
-    this.msgArea.scrollTop = this.rulesArea.scrollTop
+    this.msgArea.scrollTop = this.ruleEditor.scrollTop
   }
   
   loadRules() {
     var freshRules = []
     var success = true
-    var lines = rulesArea.value.replace(/\r/g, '').split('\n')
+    var lines = ruleEditor.value.replace(/\r/g, '').split('\n')
     this.msgArea.value = ''
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
@@ -132,7 +132,7 @@ class Typomatic {
       console.log(`loaded ${this.rules.length} new rules`)
       
       // save code for comparison
-      this.code = rulesArea.value
+      this.code = ruleEditor.value
       
       // update GUI
       this.rulesButton.disabled = true
@@ -148,21 +148,21 @@ class Typomatic {
   // https://stackoverflow.com/a/6637396/1644283
   insertTab(event) {
     // refocus on rules area
-    this.rulesArea.focus()
+    this.ruleEditor.focus()
     
     // get selection
-    var code = this.rulesArea.value
-    var start = this.rulesArea.selectionStart
-    var end = this.rulesArea.selectionEnd
+    var code = this.ruleEditor.value
+    var start = this.ruleEditor.selectionStart
+    var end = this.ruleEditor.selectionEnd
     
     // replace selection with tab
     var pre = code.slice(0, start)
     var post = code.slice(end)
-    this.rulesArea.value = pre + '\t' + post
+    this.ruleEditor.value = pre + '\t' + post
     
     // reposition caret
-    this.rulesArea.selectionStart = start + 1
-    this.rulesArea.selectionEnd = start + 1
+    this.ruleEditor.selectionStart = start + 1
+    this.ruleEditor.selectionEnd = start + 1
     
     // compare code
     this.compareCode()

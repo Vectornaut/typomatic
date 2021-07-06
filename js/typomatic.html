@@ -65,7 +65,7 @@
   </div>
   <div id="display-area"><span id="display"></span></div>
   
-  <h1><label for="rulesArea">Rules</label></h1>
+  <h1><label for="ruleEditor">Rules</label></h1>
   <div class="control-bar">
     <div class="control">
       <input type="button" id="rulesButton" value="Load rules"/>
@@ -74,8 +74,8 @@
       <input type="button" id="tabButton" value="Tab"/>
     </div>
   </div>
-  <div id="rulesContainer">
-    <textarea id="rulesArea" rows="20"></textarea>
+  <div id="ruleContainer">
+    <textarea id="ruleEditor" rows="20"></textarea>
     <textarea id="msgArea" rows="20" readonly="true" disabled="true"></textarea><!-- disabled to deflect focus -->
   </div>
   
@@ -91,7 +91,7 @@ machine = new Typomatic(
   document.getElementById('playButton'),
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp'),
-  document.getElementById('rulesArea'),
+  document.getElementById('ruleEditor'),
   document.getElementById('msgArea'),
   document.getElementById('rulesButton'),
   document.getElementById('tabButton')
