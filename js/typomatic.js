@@ -76,7 +76,7 @@ class Typomatic {
   
   updateDisplay() {
     // clear the display
-    display = this.display
+    var display = this.display
     while (display.firstChild) {
       display.removeChild(display.lastChild)
     }
