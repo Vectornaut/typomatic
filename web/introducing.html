@@ -95,13 +95,13 @@ em {
 <p>Click the <i>Load rules</i> button above the rule editor. Typomatic will disable the button to show you that the rules you&rsquo;ve written are in use. (If Typomatic has trouble reading the rule table, it won&rsquo;t load the new rules. Instead, it&rsquo;ll leave the <i>Load rules</i> button enabled and show an error message next to each line where it found a problem.)
 <p>Type the input string <tt>oo&lt;&lt;</tt> into the <i>Input</i> field at the top of the page and click <i>Load</i> (or press <i>Enter</i>). The input string will appear in big characters below.</p>
 <p>Now, click <i>Play</i>. Typomatic will start manipulating the string you see by applying the rules you loaded. If it gets to a point where none of the rules can be applied, it will stop automatically. You can stop it yourself by clicking <i>Play</i> again. You can also click <i>Step</i> to run one step at a time.</p>
-<p>If Typomatic doesn&rsquo;t respond as expected when you click <i>Play</i> or <i>Step</i>, make sure your latest rules are loaded. Check the formatting of your rule table: if a rule is formatted wrong, Typomatic won&rsquo;t apply it in the way you expect. Finally, remember that string manipulation routines can be confusing. Make sure there really is a rule that ought to be applied!</p>
+<p>If Typomatic doesn&rsquo;t respond as expected when you click <i>Step</i> or <i>Play</i>, make sure your latest rules are loaded. Check the formatting of your rule table: if a rule is formatted wrong, Typomatic won&rsquo;t apply it in the way you expect. Finally, remember that string manipulation routines can be confusing. Make sure there really is a rule that ought to be applied!</p>
 
 <h1>Computing with Typomatic like a boss</h1>
-<p>Now that you&rsquo;ve got the hang of Typomatic, let&rsquo;s check out its wicked cool advanced features.</p>
+<p>Now that you&rsquo;ve got the hang of Typomatic, let&rsquo;s check out its advanced features.</p>
 
 <h2>Stopping rules</h2>
-You can use the kind of routine you&rsquo;ve seen so far to do extraordinarily sophisticated computations, but some simple tasks are disconcertingly out of reach. For instance, there&rsquo;s no routine that will turn whatever string you start with into the same string with a single <tt>&amp;</tt> stuck on the front, and then stop. That&rsquo;s because I forgot to tell you about a tiny but essential piece of Markov&rsquo;s model of computation: stopping rules.</p>
+You can use the kind of routine you&rsquo;ve seen so far to do sophisticated computations, but some simple tasks are disconcertingly out of reach. For instance, there&rsquo;s no routine that will stick a single <tt>&amp;</tt> onto the front of your input string and then stop. That&rsquo;s because I forgot to tell you about a tiny but essential piece of Markov&rsquo;s model of computation: stopping rules.</p>
 <p>The table you use to describe a routine is allowed to have a third column, like this:</p>
 <table>
 <tr><th class="ft">from</th><th class="ft">to</th><th class="ft">stop?</th></tr>
@@ -111,7 +111,7 @@ You can use the kind of routine you&rsquo;ve seen so far to do extraordinarily s
 <tr><td></td><td>[~</td></tr>
 </table>
 Every time you apply a rule, you check for a <tt>%</tt> mark in the <span class="ft">stop?</span> column. If you see one, you don&rsquo;t bother going back to the top of the table and looking for another rule to apply. You&rsquo;re done! A rule with a mark in the third column is called a &ldquo;stopping rule,&rdquo; and you can have as many of them as you want.</p>
-<p>To mark a rule as a stopping rule in a Typomatic source file, just add a <tt>%</tt> character in a third column, separated from the <span class="ft">to</span> column by a single tab or space character. When Typomatic applies a stopping rule, it automatically stops running. You can start it again by pressing the down arrow or the right arrow. If you&rsquo;re using the right arrow to apply one rule at a time, stopping rules won&rsquo;t have any noticeable effect, because Typomatic would have stopped after one rule anyway.</p>
+<p>To mark a rule as a stopping rule in a Typomatic rule table, just add a <tt>%</tt> character in a third column, separated from the <span class="ft">to</span> column by a single tab or space character. When Typomatic applies a stopping rule, it automatically stops running. You can start it again by clicking <i>Step</i> or <i>Play</i>. If you&rsquo;re running one step at a time, stopping rules won&rsquo;t have any noticeable effect, because Typomatic would&rsquo;ve stopped after one rule anyway.</p>
 
 <h2>Sounds and colors</h2>
 <p>Stopping is the most computationally important thing you can make Typomatic do when it applies a rule, but it isn&rsquo;t the most entertaining. You can make Typomatic play a sound when it applies a rule by adding a fourth column with one of the six sound symbols:</p>
