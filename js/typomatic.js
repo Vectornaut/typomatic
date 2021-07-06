@@ -135,7 +135,7 @@ class Typomatic {
       console.log(`loaded ${this.rules.length} new rules`)
       
       // update GUI
-      this.rulesButton.disabled = this.rulesArea.value.length < 10000
+      this.rulesButton.disabled = true
       this.rulesButton.classList.remove('error')
       this.msgArea.classList.remove('error')
     } else {
