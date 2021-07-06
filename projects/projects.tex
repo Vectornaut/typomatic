@@ -1,0 +1,302 @@
+\documentclass{article}
+\usepackage[hmargin=1.5in, vmargin=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{marvosym}
+\let\Cross\relax
+\usepackage{bbding}
+\usepackage{manfnt}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+\input mayaps
+\mayaSize{10pt}
+\newcommand{\rmaya}[1]{\rotatebox[origin=c]{-90}{\maya{#1}}}
+
+\newcommand*{\note}{\item[\Letter]}
+\newcommand*{\writeit}{\item[\NibRight]}
+\newcommand*\proveit{\item[\manimpossiblecube]}
+\newcommand*{\thinkit}{\item[\Coffeecup]}
+
+\newcommand{\spec}[1]{{\sc #1}}
+\newcommand{\str}[1]{\texttt{#1}}
+
+\title{(Th)ink Machine}
+\date{}
+
+\begin{document}
+\maketitle
+\section*{\textit{Notes}}
+\begin{itemize}
+\note You don't have to do the projects in order! Do whatever seems fun at the moment.
+\note You don't have to do the projects at all! They're just here to inspire you. If you think of something cool, run with it---and please tell me about it, because I love cool things.
+\end{itemize}
+\section*{\textit{Key}}
+\begin{itemize}
+\note Here's a thing you should know.
+\writeit Write a computer to do this.
+\proveit Can you write a computer to do this?
+\thinkit Think about this.
+\end{itemize}
+\section*{Arithmetic}
+\begin{itemize}
+\note When I say a computer is supposed to input or output a number, with no other details, I generally mean for the number to be represented as a tally, like this:
+\begin{center}
+\begin{tabular}{rl}
+1 & \str{o} \\
+2 & \str{oo} \\
+3 & \str{ooo} \\
+4 & \str{oooo}
+\end{tabular}
+\end{center}
+Of course, any symbol will work just as well as \str{o}!
+\end{itemize}
+\subsection*{Products}
+\begin{itemize}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & Two numbers \\
+\spec{out} & The product of the numbers
+\end{tabular}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number \\
+\spec{out} & The square of the number
+\end{tabular}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number $n$ \\
+\spec{out} & The sum of the numbers from $1$ to $n$
+\end{tabular}
+\end{itemize}
+\subsection*{Remainders}
+\begin{itemize}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number \\
+\spec{out} & The number's remainder when divided by five
+\end{tabular}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & Two numbers \\
+\spec{out} & The first number's remainder when divided by the second
+\end{tabular}
+\writeit
+The {\em Euclidean algorithm} is a method for finding the greatest common divisor of two numbers. It works like this.
+
+Start with a pair of numbers. Subtract the smaller number from the larger number (if the numbers are equal, subtract either one from the other). Now you have a new pair of numbers. Keep subtracting the smaller from the larger until one of the numbers is gone. The remaining number is the greatest common divisor of the numbers you started with.
+
+Write a computer that finds the greatest common divisor of two numbers.
+\writeit Write a computer that takes in a number $n$ and a string of bars, and turns every $n$th bar into a dot.
+\writeit
+\begin{tabularx}{\textwidth}{rX}
+\spec{in} & A number \\
+\spec{out} & The empty string if the number is prime \newline A non-empty string otherwise
+\end{tabularx}
+\end{itemize}
+\subsection*{Sequences}
+\begin{itemize}
+\writeit Write a computer that will show you all the numbers, one by one.
+\writeit Write a computer that will show you all the Fibonacci numbers, one by one.
+\writeit Write a computer that will show you all the prime numbers, one by one.
+\writeit
+Write a computer that churns out the never-ending string
+\begin{center}
+\str{o\_oo\_ooo\_oooo\_ooooo\_oooooo\_}\quad\ldots
+\end{center}
+(the ellipsis isn't part of the string).
+\writeit
+Take a strip of paper and fold it in half over and over, always folding in the same direction. Then, open each crease out into a $90^\circ$ corner, keeping the natural direction of the crease. The shape you end up with is called a {\em dragon curve}.
+
+Folding paper over and over gets difficult really quickly. It would be much easier to fold a dragon curve if you knew the sequence of left and right folds ahead of time---then you'd only have to fold one layer of paper.
+
+Write a computer that will show you all the folding sequences for dragon curves.
+\end{itemize}
+\subsection*{Digits}
+\begin{itemize}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number in binary \\
+\spec{out} & The number (as a tally)
+\end{tabular}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number (as a tally) \\
+\spec{out} & The number in binary
+\end{tabular}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A number in binary \\
+\spec{out} & The number in trinary
+\end{tabular}
+\writeit
+In the Maya number system, numbers up to nineteen are written as tallies, like this:
+\begin{center}
+\begin{tabular}{rl|rl|rl|rl|rl}
+0 & \maya{900} & 1 & \maya{901} & 2 & \maya{902} & 3 & \maya{903} & 4 & \maya{904} \\
+\hline
+5 & \maya{905} & 6 & \maya{901:905} & 7 & \maya{902:905} & 8 & \maya{903:905} & 9 & \maya{904:905} \\
+\hline
+10 & \maya{905:905} & 11 & \maya{901:905:905} & 12 & \maya{902:905:905} & 13 & \maya{903:905:905} & 14 & \maya{904:905:905} \\
+\hline
+15 & \maya{905:905:905} & 16 & \maya{901:905:905:905} & 17 & \maya{902:905:905:905} & 18 & \maya{903:905:905:905} & 19 & \maya{904:905:905:905} \\
+\end{tabular}
+\end{center}
+Larger numbers are written in base twenty, using the tallies as digits:
+\begin{center}
+\begin{tabular}{rc|rc|rc}
+$20 \times 2$ & \maya{902} & $20 \times 2$ & \maya{902} & $20 \times 8$ & \maya{903:905} \\
+$1 \times 0$ & \maya{900} & $1 \times 5$ & \maya{905} & $1 \times 3$ & \maya{903} \\
+\textbf{40} & & \textbf{45} & & \textbf{163} \\
+\hline
+$20^2 \times 10$ & \maya{905:905} & $20^2 \times 16$ & \maya{901:905:905:905} & $20^2 \times 4$ & \maya{904} \\
+$20 \times 0$ & \maya{900} & $20 \times 8$ & \maya{903:905} & $20 \times 6$ & \maya{901:905} \\
+$1 \times 19$ & \maya{904:905:905:905} & $1 \times 1$ & \maya{901} & $1 \times 9$ & \maya{904:905} \\
+\textbf{4019} & & \textbf{6561} & & \textbf{1729}
+\end{tabular}
+\end{center}
+Tipping Maya numerals on their sides gives a nice way to write them as strings:
+\begin{center}
+\begin{tabular}{ll}
+\rmaya{902:905:905} & \str{||..} \\
+\rmaya{903} \rmaya{903:905} & \str{...\~{}|...} \\
+\rmaya{900} \rmaya{902} & \str{@\~{}..} \\
+\rmaya{904:905:905:905} \rmaya{900} \rmaya{905:905} & \str{|||....\~{}@\~{}||}
+\end{tabular}
+\end{center}
+Write a computer that turns numbers (in whatever form you want) into Maya numerals.
+\end{itemize}
+\section*{Parsing}
+\begin{itemize}
+\writeit
+\begin{tabularx}{\textwidth}{rX}
+\spec{in} & A string of parentheses \\
+\spec{out} & The empty string if the parentheses are balanced \newline A non-empty string otherwise
+\end{tabularx}
+\writeit
+\begin{tabular}{rl}
+\spec{in} & A boolean expression---a tree with ``and'' or ``or'' at each node, and ``true'' or ``false'' at each leaf \\
+\spec{out} & The value of the expression
+\end{tabular}
+\end{itemize}
+\section*{Computation}
+\begin{itemize}
+\note In this section, we'll be talking about lots of different kinds of computers, so I'll refer to the ones we've been writing as ``Markov algorithms'' instead of just ``computers.''
+\end{itemize}
+\subsection*{Computer architecture}
+\begin{itemize}
+\proveit Given a Markov algorithm that does computation $A$, and another Markov algorithm that does computation $B$, can you systematically build a Markov algorithm that does computation $A$ and uses the output as the input for computation $B$?
+\end{itemize}
+\subsection*{Changing the rules}
+\begin{itemize}
+\proveit Given any Markov algorithm, can you systematically build a Markov algorithm that does the same computation using only the symbols \str{0} and \str{1}?\footnote{What if you could use the symbol \str{2} as well? If your answer looks the same, you may be missing something important\ldots}
+\thinkit What does ``the same computation'' mean, anyway?
+\thinkit For that matter, what does it mean to ``systematically build'' something?
+\proveit A ``vertically nondeterministic'' Markov algorithm doesn't have to go straight down the list of rules, applying the first one that can be applied. It applies the rules in any order it wants to!
+
+Given any ordinary Markov algorithm, can you systematically build a vertically nondeterministic Markov algorithm that does the same computation?
+
+Given any vertically nondeterministic Markov algorithm, can you systematically build an ordinary Markov algorithm that does the same computation?
+\proveit A ``horizontally nondeterministic'' Markov algorithm doesn't have to go through the string it's working on from left to right, applying each rule in the first place it can be applied. It applies the rules anywhere it wants to!
+\end{itemize}
+\subsection*{Languages}
+\begin{itemize}
+\proveit
+Given a regular language, can you write a Markov algorithm that recognizes the language?
+
+\begin{tabularx}{\textwidth}{rX}
+\spec{in} & A string \\
+\spec{out} & The empty string if the string is in the language \newline A non-empty string otherwise
+\end{tabularx}
+\proveit
+If the answer to the previous question is ``yes,'' can you automate the process?
+
+\begin{tabular}{rl}
+\spec{in} & A description of a regular language \\
+\spec{out} & A description of a Markov algorithm that recognizes the language
+\end{tabular}
+\proveit Can you come up with a language that can't be recognized by any Markov algorithm?
+\end{itemize}
+\subsection*{Busy beavers}
+\begin{itemize}
+\proveit Let's say the ``size'' of a Markov algorithm is the total number of symbols used to specify the rules. For example, the algorithm
+\begin{center}
+\begin{tabular}{ll}
+\str{+\textless} & \str{\textless +} \\
+\str{o\textless} & \str{\textless +o} \\
+\str{\textless} \\
+\str{o}
+\end{tabular}
+\end{center}
+has size 11.
+
+If a size-1 Markov algorithm eventually stops, how many steps can it run before stopping, given a 1-symbol input? What about a size-2 algorithm? A size-3 algorithm? A size-$n$ algorithm?
+\end{itemize}
+\subsection*{Halting}
+\begin{itemize}
+\writeit Pick a number. If it's even, divide it by two. If it's odd, multiply it by three and add one. Now you have a new number. Keep doing this until you reach one.
+
+Pretty tedious, isn't it? Write a computer to do it for you!
+\proveit Can you write a computer that looks at the rules and input of any computer and tells you whether the computer will eventually stop running when it's given the specified input?
+\end{itemize}
+\subsection*{Emulation}
+\begin{itemize}
+\proveit FRACTRAN is a programming language invented by John Conway. Instead of working on strings of symbols, a FRACTRAN program works on positive integers.
+
+A FRACTRAN program is described by a list of positive rational numbers. To run a step of the program, go through the list in order, looking at the product of each rational on the list with the integer you're working on. If you get an integer product, replace the integer you're working on with that, and go back to the beginning of the list. If you never get an integer product, you're done!
+
+Given any FRACTRAN program, can you systematically build a Markov algorithm that does the same computation?
+
+Given any Markov algorithm, can you systematically build a FRACTRAN program that does the same computation?
+\proveit
+A {\em finite state machine} is a simple creature that eats up a string of symbols and then tells you something about it. The machine has a finite set of moods, or ``states,'' that it can be in. When you feed the machine a symbol, its mood can change---it moves to a new state, which is determined by its current state and the symbol you gave it. If you find the machine in a certain state, and then you feed it a string of symbols, the state the machine ends up in after it's eaten the whole string tells you something about the string.
+
+Given a finite state machine, can you systematically build a Markov algorithm that does the same computation? What about vice versa?
+\proveit
+A finite state machine doesn't have a very good memory; its current state is all it knows about the past. Let's help it out by giving it a place to write things down. We'll make it a notebook with an infinite number of pages, so it can turn them to the right or to the left as many times as it wants without running out. 
+
+Each page of the notebook can hold one symbol; for simplicity, we'll say a blank page holds ``the blank symbol.'' Instead of having us feed it symbols, the machine eats symbols off the pages of the notebook. When the finite state machine eats a symbol, it doesn't just go to a new state; it can also write a symbol on the page it's currently looking at, and then it can turn the page in either direction. Like before, what the machine does is determied by its current state and the symbol it just ate.
+
+A finite state machine with a notebook like this is called a {\em Turing machine}. Given a Turing machine, can you systematically build a Markov algorithm that does the same computation? What about vice versa?
+\proveit Can you write a Markov algorithm that looks at the rules and input of a finite state machine and tells you what the machine will do when given the specified input?
+\proveit Can you write a Markov algorithm that looks at the rules and input of a Turing machine and tells you what the machine will do when given the specified input?
+\proveit Can you write a Markov algorithm that looks at the rules and input of a Markov algorithm and tells you what the algorithm will do when given the specified input?
+\end{itemize}
+\section*{Group theory}
+\begin{itemize}
+\note
+Let's say you have a generators-and-relations presentation for a group. A string of generators and inverse generators is called a ``word.'' It's often very hard to tell whether two words represent the same group element just by looking at them. (For example, can you prove that the word
+\[ aba^{-1}b \]
+in the group
+\[ \langle a, b \mid ab^2a^{-1}b^{-3}, ba^2b^{-1}a^{-3} \rangle \]
+represents the identity?)
+
+To figure out whether two words represent the same group element, it's enough to be able to figure out whether a given word represents the identity. I'll call a computer that does this an ``identity recognizer.'' To keep things focused, let's say an identity recognizer has to act like this:
+
+\begin{tabularx}{\textwidth}{rX}
+\spec{in} & A word \\
+\spec{out} & The empty string if the word represents the identity \newline A non-empty string otherwise
+\end{tabularx}
+\writeit
+The {\em dihedral group} $D_{2n}$ is the symmetry group of an $n$-sided polygon. It can be presented with generators and relations as
+\[ \langle r, s \mid r^n, s^2, (rs)^2 \rangle, \]
+where $s$ flips the polygon and $r$ rotates it by one step.
+
+Pick an $n$ and write an identity recognizer for $D_{2n}$.
+\writeit
+The {\em Heisenberg group} $H_1(\mathbb{Z}/N\mathbb{Z})$ shows up in physics as the symmetry group of a ``quantum frog'' hopping around on a circle of lily pads. It can be presented with generators and relations as
+\[ \langle u, v, q \mid u^N, v^N, q^N, uqu^{-1}q^{-1}, vqv^{-1}q^{-1}, uvu^{-1}v^{-1}q^{-1} \rangle, \]
+where $u$ changes the frog's position by one step, $v$ changes the frog's momentum by one step, and $q$ is there for, uh\ldots technical reasons.\footnote{If you really want to know, see ``Central Extensions in Physics,'' by G.M. Tuynman and W.A.J.J. Wiegerinck.}
+
+Pick an $N$ and write an identity recognizer for $H_1(\mathbb{Z}/N\mathbb{Z})$.
+\writeit
+The {\em triangle group} $D(p, q, r)$ is the orientation-preserving symmetry group of a sphere, plane, or hyperbolic plane tiled by triangles with angles $\frac{\tau}{2p}$, $\frac{\tau}{2q}$, and $\frac{\tau}{2r}$. It can be presented with generators and relations as
+\[ \langle x, y \mid x^p, y^q, (xy)^r \rangle, \]
+where $x$ rotates by $\frac{\tau}{p}$ around the $\frac{\tau}{2p}$ vertex, $y$ rotates by $\frac{\tau}{q}$ around the $\frac{\tau}{2q}$ vertex, and $xy$ rotates by $\frac{\tau}{r}$ around the $\frac{\tau}{2r}$ vertex.
+
+Pick some $p$, $q$, and $r$ and write an identity recognizer for $D(p, q, r)$. Don't set $q$ and $r$ to two---that's cheating! Also, don't spend more than ten minutes on this project. Ask me for the answer and you'll find out why\ldots
+\thinkit Using the relations of a group to rewrite a word is a lot like using the relations of a Markov algorithm to rewrite a string, isn't it? Can you make this analogy more precise?
+\proveit Can you write a computer that looks at a group (presented with generators and relations) and a word (in the given generators) and tells you whether the word represents the identity?
+\end{itemize}
+\end{document}
