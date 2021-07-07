@@ -87,7 +87,9 @@
 </body>
 
 <script>
+audioContext = new (window.AudioContext || window.webkitAudioContext)()
 machine = new Typomatic(
+  audioContext,
   document.getElementById('display'),
   document.getElementById('inputField'),
   document.getElementById('inputButton'),
@@ -100,14 +102,17 @@ machine = new Typomatic(
   document.getElementById('rulesButton'),
   document.getElementById('tabButton')
 )
-test = machine.resources.sounds['/']
+console.log(machine.resources.sounds)
 document.getElementById('testSound').addEventListener(
   'click',
   function() {
     console.log('boing')
-    // hat tip robert o'callahan
-    // https://robert.ocallahan.org/2011/11/latency-of-html5-sounds.html
-    test.cloneNode().play()
+    if (machine.resources.sounds['/']) {
+      var source = audioContext.createBufferSource()
+      source.buffer = machine.resources.sounds['/']
+      source.connect(audioContext.destination)
+      source.start()
+    }
   }
 )
 </script>

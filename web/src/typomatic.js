@@ -32,7 +32,7 @@ class Typomatic {
   code
   
   // resources
-  resources = new ResourceKit()
+  resources
   
   // settings
   beat
@@ -47,7 +47,10 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, ruleEditor, msgArea, rulesButton, tabButton) {
+  constructor(audioContext, display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, ruleEditor, msgArea, rulesButton, tabButton) {
+    // get sounds and colors
+    this.resources = new ResourceKit(audioContext)
+    
     // store the controls we'll need later
     this.display = display
     this.inputField = inputField
