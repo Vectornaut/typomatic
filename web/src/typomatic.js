@@ -30,6 +30,7 @@ class Typomatic {
   playButton
   tempoRange
   tempoDisp
+  muteButton
   ruleEditor
   msgArea
   rulesButton
@@ -48,7 +49,21 @@ class Typomatic {
   stepInterval = null
   stepping = false
   
-  constructor(audioContext, display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, ruleEditor, msgArea, rulesButton, tabButton) {
+  constructor(
+    audioContext,
+    display,
+    input,
+    inputButton,
+    stepButton,
+    playButton,
+    tempoRange,
+    tempoDisp,
+    muteButton,
+    ruleEditor,
+    msgArea,
+    rulesButton,
+    tabButton
+  ) {
     // set up sounds and colors
     this.resources = new ResourceKit(audioContext)
     
@@ -59,6 +74,7 @@ class Typomatic {
     this.playButton = playButton
     this.tempoRange = tempoRange
     this.tempoDisp = tempoDisp
+    this.muteButton = muteButton
     this.ruleEditor = ruleEditor
     this.msgArea = msgArea
     this.rulesButton = rulesButton
@@ -70,6 +86,7 @@ class Typomatic {
     playButton.addEventListener('click', this.togglePlay.bind(this))
     tempoRange.addEventListener('input', this.showTempo.bind(this))
     tempoRange.addEventListener('change', this.changeTempo.bind(this))
+    muteButton.addEventListener('click', this.toggleSound.bind(this))
     ruleEditor.addEventListener('input', this.compareCode.bind(this))
     ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))
     rulesButton.addEventListener('click', this.loadRules.bind(this))
@@ -111,6 +128,12 @@ class Typomatic {
     this.beat = Math.round(6e4/tempo)
     this.halfBeat = Math.round(3e4/tempo)
     if (playing) this.play(false)
+  }
+  
+  toggleSound() {
+    if (this.soundOn) this.muteButton.classList.add('pressed')
+    else this.muteButton.classList.remove('pressed')
+    this.soundOn = !this.soundOn
   }
   
   compareCode() {

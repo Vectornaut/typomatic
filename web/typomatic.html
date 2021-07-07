@@ -63,6 +63,9 @@
       <span id="tempoDisp"></span>
       <input type="range" id="tempoRange" min="60" max="480" step="60" value="240"/>
     </div>
+    <div class="control">
+      <input type="button" id="muteButton", value="Mute"/>
+    </div>
   </div>
   <div id="display-area"><span id="display"></span></div>
   
@@ -93,6 +96,7 @@ new Typomatic(
   document.getElementById('playButton'),
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp'),
+  document.getElementById('muteButton'),
   document.getElementById('ruleEditor'),
   document.getElementById('msgArea'),
   document.getElementById('rulesButton'),
