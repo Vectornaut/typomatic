@@ -62,9 +62,13 @@ class Rule {
     // --- if a matching substring is found, apply the rule ---
     
     // play sound
-    // we clone the audio element to reduce latency (hat tip robert o'callahan)
-    // https://robert.ocallahan.org/2011/11/latency-of-html5-sounds.html
-    if (machine.soundOn && this.sound) this.sound.cloneNode().play()
+    if (machine.soundOn && this.sound) {
+      var audioContext = machine.audioContext
+      var source = audioContext.createBufferSource()
+      source.connect(audioContext.destination)
+      source.buffer = this.sound
+      source.start()
+    }
     
     // cut the working string before and after the match
     var pre = machine.str.slice(0, index)

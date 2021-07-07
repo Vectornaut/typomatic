@@ -108,9 +108,9 @@ document.getElementById('testSound').addEventListener(
   function() {
     console.log('boing')
     if (machine.resources.sounds['/']) {
-      var source = audioContext.createBufferSource()
+      var source = machine.audioContext.createBufferSource()
       source.buffer = machine.resources.sounds['/']
-      source.connect(audioContext.destination)
+      source.connect(machine.audioContext.destination)
       source.start()
     }
   }

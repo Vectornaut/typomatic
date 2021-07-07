@@ -20,7 +20,11 @@ along with Typomatic.  If not, see <http://www.gnu.org/licenses/>.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 class Typomatic {
-  // gui
+  // resources
+  resources
+  
+  // interface
+  audioContext
   display
   inputField
   playButton
@@ -30,9 +34,6 @@ class Typomatic {
   msgArea
   rulesButton
   code
-  
-  // resources
-  resources
   
   // settings
   beat
@@ -48,10 +49,11 @@ class Typomatic {
   stepping = false
   
   constructor(audioContext, display, input, inputButton, stepButton, playButton, tempoRange, tempoDisp, ruleEditor, msgArea, rulesButton, tabButton) {
-    // get sounds and colors
+    // set up sounds and colors
     this.resources = new ResourceKit(audioContext)
     
-    // store the controls we'll need later
+    // store the interface elements we'll need later
+    this.audioContext = audioContext
     this.display = display
     this.inputField = inputField
     this.playButton = playButton

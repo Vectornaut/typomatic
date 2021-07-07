@@ -4,18 +4,23 @@ class ResourceKit {
     '%': true
   }
   sounds = {
-    /*'': null,
-    '.': new Audio('sounds/bip.wav'),
-    '+': new Audio('sounds/bleep.wav'),
-    '/': new Audio('sounds/boing.wav'),
-    '$': new Audio('sounds/bling.wav'),
-    '#': new Audio('sounds/scratch.wav'),
-    '*': new Audio('sounds/sparkle.wav')*/
+    '': null,
+    '.': null,
+    '+': null,
+    '/': null,
+    '$': null,
+    '#': null,
+    '*': null
   }
   colors = {}
   
   constructor(audioContext) {
+    this.loadAudio('.', 'sounds/bip.wav', audioContext)
+    this.loadAudio('+', 'sounds/bleep.wav', audioContext)
     this.loadAudio('/', 'sounds/boing.wav', audioContext)
+    this.loadAudio('$', 'sounds/bling.wav', audioContext)
+    this.loadAudio('#', 'sounds/scratch.wav', audioContext)
+    this.loadAudio('*', 'sounds/sparkle.wav', audioContext)
     
     this.colors[''] = ResourceKit.makeSpan('white-highlight')
     this.colors['p'] = ResourceKit.makeSpan('pink-highlight')
