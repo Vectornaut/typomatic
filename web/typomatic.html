@@ -38,12 +38,12 @@
 </head>
 
 <body>
-  <audio id="bip-sound" src="sounds/bip.wav" preload></audio>
-  <audio id="bleep-sound" src="sounds/bleep.wav" preload></audio>
-  <audio id="bling-sound" src="sounds/bling.wav" preload></audio>
-  <audio id="boing-sound" src="sounds/boing.wav" preload></audio>
-  <audio id="scratch-sound" src="sounds/scratch.wav" preload></audio>
-  <audio id="sparkle-sound" src="sounds/sparkle.wav" preload></audio>
+  <audio id="bip-sound" src="sounds/bip.wav" preload="auto"></audio>
+  <audio id="bleep-sound" src="sounds/bleep.wav" preload="auto"></audio>
+  <audio id="bling-sound" src="sounds/bling.wav" preload="auto"></audio>
+  <audio id="boing-sound" src="sounds/boing.wav" preload="auto"></audio>
+  <audio id="scratch-sound" src="sounds/scratch.wav" preload="auto"></audio>
+  <audio id="sparkle-sound" src="sounds/sparkle.wav" preload="auto"></audio>
   
   <ul id="navstripe">
   <li><a class="return" href="../seeing.html">&#8617;</a></li>
@@ -108,5 +108,13 @@ machine = new Typomatic(
   document.getElementById('tabButton')
 )
 test = machine.resources.sounds['/']
-document.getElementById('testSound').addEventListener('click', test.play.bind(test))
+document.getElementById('testSound').addEventListener(
+  'click',
+  function() {
+    console.log('boing')
+    // hat tip robert o'callahan
+    // https://robert.ocallahan.org/2011/11/latency-of-html5-sounds.html
+    test.cloneNode().play()
+  }
+)
 </script>
