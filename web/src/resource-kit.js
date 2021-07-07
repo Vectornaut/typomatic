@@ -12,23 +12,23 @@ class ResourceKit {
     '#': null,
     '*': null
   }
-  colors = {}
+  colors = {
+    '': ResourceKit.makeSpan('white-highlight'),
+    'p': ResourceKit.makeSpan('pink-highlight'),
+    'o': ResourceKit.makeSpan('orange-highlight'),
+    'y': ResourceKit.makeSpan('yellow-highlight'),
+    'g': ResourceKit.makeSpan('green-highlight'),
+    'b': ResourceKit.makeSpan('blue-highlight'),
+    'v': ResourceKit.makeSpan('violet-highlight')
+  }
   
   constructor(audioContext) {
-    this.loadAudio('.', 'sounds/bip.wav', audioContext)
-    this.loadAudio('+', 'sounds/bleep.wav', audioContext)
-    this.loadAudio('/', 'sounds/boing.wav', audioContext)
-    this.loadAudio('$', 'sounds/bling.wav', audioContext)
-    this.loadAudio('#', 'sounds/scratch.wav', audioContext)
-    this.loadAudio('*', 'sounds/sparkle.wav', audioContext)
-    
-    this.colors[''] = ResourceKit.makeSpan('white-highlight')
-    this.colors['p'] = ResourceKit.makeSpan('pink-highlight')
-    this.colors['o'] = ResourceKit.makeSpan('orange-highlight')
-    this.colors['y'] = ResourceKit.makeSpan('yellow-highlight')
-    this.colors['g'] = ResourceKit.makeSpan('green-highlight')
-    this.colors['b'] = ResourceKit.makeSpan('blue-highlight')
-    this.colors['v'] = ResourceKit.makeSpan('violet-highlight')
+    this.loadSound('.', 'sounds/bip.wav', audioContext)
+    this.loadSound('+', 'sounds/bleep.wav', audioContext)
+    this.loadSound('/', 'sounds/boing.wav', audioContext)
+    this.loadSound('$', 'sounds/bling.wav', audioContext)
+    this.loadSound('#', 'sounds/scratch.wav', audioContext)
+    this.loadSound('*', 'sounds/sparkle.wav', audioContext)
   }
   
   // references:
@@ -42,7 +42,7 @@ class ResourceKit {
   //   MDN Web Docs - AudioBufferSourceNode
   //   https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode
   //
-  loadAudio(name, url, audioContext) {
+  loadSound(name, url, audioContext) {
     // open a request for the desired sound
     var request = new XMLHttpRequest()
     request.open('GET', url, true)
