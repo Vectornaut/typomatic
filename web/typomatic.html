@@ -63,9 +63,6 @@
       <span id="tempoDisp"></span>
       <input type="range" id="tempoRange" min="60" max="480" step="60" value="240"/>
     </div>
-    <div class="control">
-      <input type="button" id="testSound" value="Test Sound"/>
-    </div>
   </div>
   <div id="display-area"><span id="display"></span></div>
   
@@ -87,9 +84,8 @@
 </body>
 
 <script>
-audioContext = new (window.AudioContext || window.webkitAudioContext)()
-machine = new Typomatic(
-  audioContext,
+new Typomatic(
+  new (window.AudioContext || window.webkitAudioContext)(),
   document.getElementById('display'),
   document.getElementById('inputField'),
   document.getElementById('inputButton'),
@@ -101,18 +97,5 @@ machine = new Typomatic(
   document.getElementById('msgArea'),
   document.getElementById('rulesButton'),
   document.getElementById('tabButton')
-)
-console.log(machine.resources.sounds)
-document.getElementById('testSound').addEventListener(
-  'click',
-  function() {
-    console.log('boing')
-    if (machine.resources.sounds['/']) {
-      var source = machine.audioContext.createBufferSource()
-      source.buffer = machine.resources.sounds['/']
-      source.connect(machine.audioContext.destination)
-      source.start()
-    }
-  }
 )
 </script>

@@ -89,7 +89,6 @@ class Rule {
     // replace the match in the working string, and update the display after
     // half a beat
     machine.str = pre + this.to + post
-    console.log(machine.str)
     setTimeout(machine.updateDisplay.bind(machine), machine.halfBeat)
     return true
   }

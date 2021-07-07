@@ -102,12 +102,10 @@ class Typomatic {
   }
   
   showTempo() {
-    console.log('show tempo')
     this.tempoDisp.innerHTML = this.tempoRange.value + ' bpm'
   }
   
   changeTempo() {
-    console.log('change tempo')
     var playing = this.stop(false)
     var tempo = this.tempoRange.value
     this.beat = Math.round(6e4/tempo)
@@ -143,7 +141,6 @@ class Typomatic {
     if (success) {
       // set rules
       this.rules = freshRules
-      console.log(`loaded ${this.rules.length} new rules`)
       
       // save code for comparison
       this.code = ruleEditor.value

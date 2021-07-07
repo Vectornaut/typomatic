@@ -51,11 +51,9 @@ class ResourceKit {
     // say what to do when the response is fulfilled
     var kit = this
     request.onload = function() {
-      console.log(kit)
       audioContext.decodeAudioData(request.response).then(
         function(buffer) {
           kit.sounds[name] = buffer
-          console.log(`loaded ${buffer}`)
         }
       )
     }
