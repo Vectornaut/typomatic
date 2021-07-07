@@ -3,6 +3,14 @@ class ResourceKit {
     '': false,
     '%': true
   }
+  sounds = {
+    '.': document.getElementById('bip-sound'),
+    '+': document.getElementById('bleep-sound'),
+    '/': document.getElementById('boing-sound'),
+    '$': document.getElementById('bling-sound'),
+    '#': document.getElementById('scratch-sound'),
+    '*': document.getElementById('sparkle-sound')
+  }
   colors = {}
   
   constructor() {

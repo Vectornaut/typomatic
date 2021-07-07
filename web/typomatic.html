@@ -38,6 +38,13 @@
 </head>
 
 <body>
+  <audio id="bip-sound" src="sounds/bip.wav" preload></audio>
+  <audio id="bleep-sound" src="sounds/bleep.wav" preload></audio>
+  <audio id="bling-sound" src="sounds/bling.wav" preload></audio>
+  <audio id="boing-sound" src="sounds/boing.wav" preload></audio>
+  <audio id="scratch-sound" src="sounds/scratch.wav" preload></audio>
+  <audio id="sparkle-sound" src="sounds/sparkle.wav" preload></audio>
+  
   <ul id="navstripe">
   <li><a class="return" href="../seeing.html">&#8617;</a></li>
   <li><a href="index.html">Hello</a></li>
@@ -63,6 +70,9 @@
       <span id="tempoDisp"></span>
       <input type="range" id="tempoRange" min="60" max="480" step="60" value="240"/>
     </div>
+    <div class="control">
+      <input type="button" id="testSound" value="Test Sound"/>
+    </div>
   </div>
   <div id="display-area"><span id="display"></span></div>
   
@@ -77,7 +87,7 @@
   </div>
   <div id="ruleContainer">
     <textarea id="ruleEditor" rows="20"></textarea>
-    <textarea id="msgArea" rows="20" readonly="true" disabled="true"></textarea><!-- disabled to deflect focus -->
+    <textarea id="msgArea" rows="20" readonly disabled></textarea><!-- disabled to deflect focus -->
   </div>
   
   </div>
@@ -97,4 +107,6 @@ machine = new Typomatic(
   document.getElementById('rulesButton'),
   document.getElementById('tabButton')
 )
+test = machine.resources.sounds['/']
+document.getElementById('testSound').addEventListener('click', test.play.bind(test))
 </script>
