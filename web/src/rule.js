@@ -40,7 +40,7 @@ class Rule {
     }
     if (tokens.length >= 4) {
       if (tokens[3] in resources.sounds) this.sound = resources.sounds[tokens[3]]
-      else throw `"${tokens[3]}" is not a valid color name`
+      else throw `"${tokens[3]}" is not a valid sound name`
     } else {
       this.sound = resources.sounds['']
     }
