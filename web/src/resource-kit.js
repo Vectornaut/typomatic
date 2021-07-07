@@ -5,12 +5,12 @@ class ResourceKit {
   }
   sounds = {
     '': null,
-    '.': document.getElementById('bip-sound'),
-    '+': document.getElementById('bleep-sound'),
-    '/': document.getElementById('boing-sound'),
-    '$': document.getElementById('bling-sound'),
-    '#': document.getElementById('scratch-sound'),
-    '*': document.getElementById('sparkle-sound')
+    '.': new Audio('sounds/bip.wav'),
+    '+': new Audio('sounds/bleep.wav'),
+    '/': new Audio('sounds/boing.wav'),
+    '$': new Audio('sounds/bling.wav'),
+    '#': new Audio('sounds/scratch.wav'),
+    '*': new Audio('sounds/sparkle.wav')
   }
   colors = {}
   
