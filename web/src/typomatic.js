@@ -37,7 +37,7 @@ class Typomatic {
   // settings
   beat
   halfBeat
-  soundOn = false
+  soundOn = true
   
   // data and instructions
   str

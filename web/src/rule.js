@@ -25,7 +25,7 @@ class Rule {
   stop
   
   // sounds and colors
-  /*[SOUND] sound*/
+  sound
   color
   
   constructor(line, resources) {
@@ -38,14 +38,12 @@ class Rule {
     } else {
       this.stop = false;
     }
-    /*[SOUND]
     if (tokens.length >= 4) {
-      if (resources.containsSound(tokens[3])) this.sound = resources.getSound(tokens[3]);
-      else throw new InterpreterException(InterpreterException.BAD_SOUND, tokens[3]);
+      if (tokens[3] in resources.sounds) this.sound = resources.sounds[tokens[3]]
+      else throw `"${tokens[3]}" is not a valid color name`
     } else {
-      sound = resources.getSound("");
+      this.sound = resources.sounds['']
     }
-    */
     if (tokens.length >= 5) {
       if (tokens[4] in resources.colors) this.color = resources.colors[tokens[4]]
       else throw `"${tokens[4]}" is not a valid color name`
@@ -63,7 +61,10 @@ class Rule {
     
     // --- if a matching substring is found, apply the rule ---
     
-    /*[SOUND] if (soundOn && this.sound != null) [PLAY SOUND]*/
+    // play sound
+    // we clone the audio element to reduce latency (hat tip robert o'callahan)
+    // https://robert.ocallahan.org/2011/11/latency-of-html5-sounds.html
+    if (machine.soundOn && this.sound) this.sound.cloneNode().play()
     
     // cut the working string before and after the match
     var pre = machine.str.slice(0, index)

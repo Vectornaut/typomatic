@@ -4,6 +4,7 @@ class ResourceKit {
     '%': true
   }
   sounds = {
+    '': null,
     '.': document.getElementById('bip-sound'),
     '+': document.getElementById('bleep-sound'),
     '/': document.getElementById('boing-sound'),
