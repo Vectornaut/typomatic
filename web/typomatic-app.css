@@ -61,6 +61,10 @@ ul#navstripe a {
 
 /* controls */
 
+#inputField {
+	font-family: "Ubuntu Mono", Verdana, sans-serif;
+}
+
 #tempoDisp {
   width: 60px;
   text-align: right;
@@ -146,6 +150,7 @@ input[type=button].error:not(:disabled):active {
 	border-width: 1px;
 	border-radius: 4px;
 	background-color: #202020;
+	font-family: "Ubuntu Mono", Verdana, sans-serif;
 }
 
 #ruleEditor {
