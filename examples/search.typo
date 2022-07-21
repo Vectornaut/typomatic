@@ -1,0 +1,66 @@
+		IN	a search term (in 0 1)
+			followed by a |
+			followed by a string to search (in 0 1)
+		OUT	the string to search with the first occurence of the
+			search term bracketed in [ ]
+
+		=== examples ===
+
+		IN	011|100110
+		OUT	10[011]0
+
+		IN	101|100110
+		OUT	100110
+
+		move error signal
+*0	0*
+*1	1*
+*:	:*
+
+		respond to error
+*[0	0[]*
+*[1	1[]*
+*]
+
+		move comparison signal
+0-	-0
+1-	-1
+[-	-[
+:-	-:
+0+	+0
+1+	+1
+[+	+[
+:+	+:
+
+		on comparison success, move check divider
+^-0	0^
+^+1	1^
+-0	0^
++1	1^
+
+		on comparison failure, emit error signal
+^-1	1*
+^+0	0*
+-1	1*
++0	0*
+
+		if we've checked the whole search term, we're done
+^:	<
+
+		erase the search term
+0<	<
+1<	<
+^<	<
+<		%
+
+		emit comparison signal
+]0	-0]
+]1	+1]
+
+		at this point, we've searched the whole string without success
+[
+]
+:	<
+
+		start the search
+|	:[]
