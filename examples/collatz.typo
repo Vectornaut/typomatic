@@ -1,5 +1,5 @@
 		IN	a number n (in .)
-		OUT	n/2 if n is even; 3n + 1 if n is odd (in .)
+		OUT	n/2 if n is even; (3n + 1)/2 if n is odd (in .)
 		LOOP	until n is 1
 
 .:	..			g
