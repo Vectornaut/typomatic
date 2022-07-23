@@ -32,9 +32,11 @@ class Typomatic {
   tempoDisp
   muteButton
   ruleEditor
-  msgArea
   rulesButton
+  msgBar
   code
+  errorSummary
+  rulesRevised
   
   // settings
   beat
@@ -60,9 +62,8 @@ class Typomatic {
     tempoDisp,
     muteButton,
     ruleEditor,
-    msgArea,
     rulesButton,
-    tabButton
+    msgBar
   ) {
     // set up sounds and colors
     this.resources = new ResourceKit(audioContext)
@@ -76,8 +77,8 @@ class Typomatic {
     this.tempoDisp = tempoDisp
     this.muteButton = muteButton
     this.ruleEditor = ruleEditor
-    this.msgArea = msgArea
     this.rulesButton = rulesButton
+    this.msgBar = msgBar
     
     // set up event listeners
     input.addEventListener('keypress', this.inputKeyPress.bind(this))
@@ -88,14 +89,13 @@ class Typomatic {
     tempoRange.addEventListener('change', this.changeTempo.bind(this))
     muteButton.addEventListener('click', this.toggleSound.bind(this))
     ruleEditor.addEventListener('input', this.compareCode.bind(this))
-    /*ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))*/
     rulesButton.addEventListener('click', this.loadRules.bind(this))
-    tabButton.addEventListener('click', this.insertTab.bind(this))
     
     // initialize display and tempo
     this.loadInput()
     this.showTempo()
     this.changeTempo()
+    this.loadRules(); // this initializes `rulesRevised` to `false`
   }
   
   updateDisplay() {
@@ -119,7 +119,11 @@ class Typomatic {
   }
   
   showTempo() {
-    this.tempoDisp.innerHTML = this.tempoRange.value + ' bpm'
+    let tempoStr = this.tempoRange.value + ' bpm';
+    if (this.tempoDisp.firstChild) {
+      this.tempoDisp.removeChild(this.tempoDisp.lastChild);
+    }
+    this.tempoDisp.appendChild(document.createTextNode(tempoStr));
   }
   
   changeTempo() {
@@ -137,20 +141,43 @@ class Typomatic {
   }
   
   compareCode() {
-    let code = this.ruleEditor.getValue()
-    this.rulesButton.disabled = code.length < 10000 && code === this.code
+    let code = this.ruleEditor.getValue();
+    let rulesRevised = code.length > 10000 || code !== this.code;
+    this.rulesButton.disabled = !rulesRevised;
+    if (this.rulesRevised !== rulesRevised) {
+      this.rulesRevised = rulesRevised;
+      if (rulesRevised) {
+        this.setMsg('Click “Load rules” to use revisions');
+      } else {
+        this.showRuleStatus();
+      }
+    }
   }
   
-  /*syncMsgs() {
-    this.msgArea.scrollTop = this.ruleEditor.scrollTop
-  }*/
+  setMsg(msg) {
+    if (this.msgBar.firstChild) {
+      this.msgBar.removeChild(this.msgBar.lastChild);
+    }
+    this.msgBar.appendChild(document.createTextNode(msg));
+  }
+  
+  showRuleStatus() {
+    if (this.errorSummary === false) {
+      if (this.rules.length === 0) {
+        this.setMsg('No rules loaded');
+      } else {
+        this.setMsg('Rules loaded');
+      }
+    } else {
+      this.setMsg(this.errorSummary);
+    }
+  }
   
   loadRules() {
     let freshRules = []
     let errors = []
     let code = ruleEditor.getValue()
     let lines = code.replace(/\r/g, '').split('\n')
-    /*this.msgArea.value = ''*/
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
       try {
@@ -158,41 +185,50 @@ class Typomatic {
           freshRules.push(new Rule(line, this.resources))
         }
       } catch (errorMsg) {
-        /*this.msgArea.value += errorMsg*/
         errors.push({
           row: i,
           column: 0,
           text: errorMsg,
-          type: "error"
+          type: 'error'
         });
       }
-      /*this.msgArea.value += '\n'*/
     }
     if (errors.length === 0) {
       // set rules
       this.rules = freshRules
       
-      // save code for comparison
-      this.code = code
-      
-      // update GUI
-      this.rulesButton.disabled = true
-      this.rulesButton.classList.remove('error')
+      // report no errors
       this.ruleEditor.session.clearAnnotations();
-      /*this.msgArea.classList.remove('error')*/
+      this.errorSummary = false;
+      
+      // set GUI to okay mode
+      this.rulesButton.classList.remove('error');
+      this.msgBar.classList.remove('error');
     } else {
-      this.rulesButton.classList.add('error')
+      // report errors
       this.ruleEditor.session.setAnnotations(errors);
-      /*this.msgArea.classList.add('error')*/
+      this.errorSummary = 'Can’t load rules: '
+      if (errors.length === 1) {
+        this.errorSummary += `error on line ${errors[0].row + 1}`
+      } else {
+        this.errorSummary += `errors on lines ${errors[0].row + 1}`
+        for (let m = 1; m < errors.length; m++) {
+          this.errorSummary += `, ${errors[m].row + 1}`
+        }
+      }
+      
+      // set GUI to error mode
+      this.rulesButton.classList.add('error');
+      this.msgBar.classList.add('error');
     }
-  }
-  
-  // hat tip StackOverflow user Sooraj
-  // https://stackoverflow.com/a/42797383/1644283
-  insertTab(event) {
-    this.ruleEditor.focus()
-    ruleEditor.session.insert(ruleEditor.getCursorPosition(), '\t')
-    this.compareCode()
+    
+    // report status
+    this.showRuleStatus();
+    
+    // save code for comparison
+    this.code = code;
+    this.rulesRevised = false;
+    this.rulesButton.disabled = true;
   }
   
   // carry out an execution step, and report whether execution is finished

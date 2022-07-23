@@ -99,7 +99,12 @@ input[type=button]:disabled {
 	border-color: hsl(0, 0%, 30%);
 }
 
-input[type=button].error:not(:disabled) {
+input[type=button]:disabled.error {
+	border-color: hsl(324, 100%, 20%);
+	color: hsl(324, 100%, 20%);
+}
+
+input[type=button].error {
 	border-color: hsl(324, 100%, 20%);
 	color: hsl(324, 100%, 50%);
 }
@@ -160,10 +165,14 @@ input[type=button].error:not(:disabled):active {
 	bottom: 0;
 	left: 0;
 	height: 400px;
-	/*white-space: pre;
-  border-style: solid;
-	border-color: hsl(0, 0%, 30%);
-  color: #c0c0c0;*/
+}
+
+#msgBar {
+	margin-left: 18px;
+}
+
+#msgBar.error {
+	color: hsl(324, 100%, 50%);
 }
 
 /*#msgArea {
