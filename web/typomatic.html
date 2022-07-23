@@ -37,6 +37,7 @@
   
   <!-- Ace editor -->
   <script src="ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="ace/src/theme-typomatic.js" type="text/javascript" charset="utf-8"></script><!-- is there a better way to do this? -->
   
   <title>Typomatic</title>
 </head>
@@ -116,8 +117,12 @@
 <script>
 // set up editor
 var ruleEditor = ace.edit('ruleEditor');
-ruleEditor.setTheme('ace/theme/twilight');
-ruleEditor.setOption('showPrintMargin', false);
+ruleEditor.setTheme('ace/theme/typomatic');
+ruleEditor.setOptions({
+  fontFamily: 'Ubuntu Mono',
+  fontSize: '11pt',
+  showPrintMargin: false
+});
 /*ruleEditor.session.setMode("ace/mode/javascript");*/
 ruleEditor.session.setUseSoftTabs(false);
 ruleEditor.session.setTabSize(16);
