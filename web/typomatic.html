@@ -30,9 +30,13 @@
   <link rel="stylesheet" type="text/css" href="typomatic.css"/>
   <link rel="stylesheet" type="text/css" href="typomatic-app.css"/>
   
+  <!-- Typomatic -->
   <script type="text/javascript" src="src/resource-kit.js"></script>
   <script type="text/javascript" src="src/rule.js"></script>
   <script type="text/javascript" src="src/typomatic.js"></script>
+  
+  <!-- Ace editor -->
+  <script src="ace/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
   
   <title>Typomatic</title>
 </head>
@@ -79,14 +83,23 @@
     </div>
   </div>
   <div id="ruleContainer">
-    <textarea id="ruleEditor" rows="20"></textarea>
-    <textarea id="msgArea" rows="20" readonly disabled></textarea><!-- disabled to deflect focus -->
+    <div id="ruleEditor"></div>
+    <!--<textarea id="msgArea" rows="20" readonly disabled></textarea>--><!-- disabled to deflect focus -->
   </div>
   
   </div>
 </body>
 
 <script>
+// set up editor
+var ruleEditor = ace.edit('ruleEditor');
+ruleEditor.setTheme('ace/theme/twilight');
+/*ruleEditor.session.setMode("ace/mode/javascript");*/
+ruleEditor.session.setUseSoftTabs(false);
+ruleEditor.session.setTabSize(16);
+/*ruleEditor.resize();*/
+
+// set up Typomatic
 new Typomatic(
   new (window.AudioContext || window.webkitAudioContext)(),
   document.getElementById('display'),
@@ -97,7 +110,7 @@ new Typomatic(
   document.getElementById('tempoRange'),
   document.getElementById('tempoDisp'),
   document.getElementById('muteButton'),
-  document.getElementById('ruleEditor'),
+  ruleEditor,
   document.getElementById('msgArea'),
   document.getElementById('rulesButton'),
   document.getElementById('tabButton')

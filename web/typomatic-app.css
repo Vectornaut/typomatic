@@ -140,27 +140,33 @@ input[type=button].error:not(:disabled):active {
 /* rules */
 
 #ruleContainer {
-	display: flex;
+	/*display: flex;*/
 	gap: 12px;
 	width: 100%;
 }
 
-#ruleContainer > textarea {
+/*#ruleContainer > textarea {
 	flex-grow: 1;
 	border-width: 1px;
 	border-radius: 4px;
 	background-color: #202020;
 	font-family: "Ubuntu Mono", Verdana, sans-serif;
-}
+}*/
 
 #ruleEditor {
-	white-space: pre;
+	position: aboslute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 400px;
+	/*white-space: pre;
   border-style: solid;
 	border-color: hsl(0, 0%, 30%);
-  color: #c0c0c0;
+  color: #c0c0c0;*/
 }
 
-#msgArea {
+/*#msgArea {
 	overflow: hidden;
 	border-style: none;
 	color: hsl(324, 100%, 50%);
@@ -169,4 +175,4 @@ input[type=button].error:not(:disabled):active {
 #msgArea.error {
 	border-style: solid;
 	border-color: hsl(324, 100%, 20%);
-}
+}*/

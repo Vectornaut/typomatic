@@ -88,7 +88,7 @@ class Typomatic {
     tempoRange.addEventListener('change', this.changeTempo.bind(this))
     muteButton.addEventListener('click', this.toggleSound.bind(this))
     ruleEditor.addEventListener('input', this.compareCode.bind(this))
-    ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))
+    /*ruleEditor.addEventListener('scroll', this.syncMsgs.bind(this))*/
     rulesButton.addEventListener('click', this.loadRules.bind(this))
     tabButton.addEventListener('click', this.insertTab.bind(this))
     
@@ -137,18 +137,20 @@ class Typomatic {
   }
   
   compareCode() {
-    this.rulesButton.disabled = this.ruleEditor.value.length < 10000 && this.ruleEditor.value === this.code
+    let code = this.ruleEditor.getValue()
+    this.rulesButton.disabled = code.length < 10000 && code === this.code
   }
   
-  syncMsgs() {
+  /*syncMsgs() {
     this.msgArea.scrollTop = this.ruleEditor.scrollTop
-  }
+  }*/
   
   loadRules() {
     var freshRules = []
     var success = true
-    var lines = ruleEditor.value.replace(/\r/g, '').split('\n')
-    this.msgArea.value = ''
+    var code = ruleEditor.getValue()
+    var lines = code.replace(/\r/g, '').split('\n')
+    /*this.msgArea.value = ''*/
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
       try {
@@ -156,49 +158,33 @@ class Typomatic {
           freshRules.push(new Rule(line, this.resources))
         }
       } catch (errorMsg) {
-        this.msgArea.value += errorMsg
+        /*this.msgArea.value += errorMsg*/
         success = false
       }
-      this.msgArea.value += '\n'
+      /*this.msgArea.value += '\n'*/
     }
     if (success) {
       // set rules
       this.rules = freshRules
       
       // save code for comparison
-      this.code = ruleEditor.value
+      this.code = code
       
       // update GUI
       this.rulesButton.disabled = true
       this.rulesButton.classList.remove('error')
-      this.msgArea.classList.remove('error')
+      /*this.msgArea.classList.remove('error')*/
     } else {
       this.rulesButton.classList.add('error')
-      this.msgArea.classList.add('error')
+      /*this.msgArea.classList.add('error')*/
     }
   }
   
-  // hat tip StackOverflow user kasdega
-  // https://stackoverflow.com/a/6637396/1644283
+  // hat tip StackOverflow user Sooraj
+  // https://stackoverflow.com/a/42797383/1644283
   insertTab(event) {
-    // refocus on rules area
     this.ruleEditor.focus()
-    
-    // get selection
-    var code = this.ruleEditor.value
-    var start = this.ruleEditor.selectionStart
-    var end = this.ruleEditor.selectionEnd
-    
-    // replace selection with tab
-    var pre = code.slice(0, start)
-    var post = code.slice(end)
-    this.ruleEditor.value = pre + '\t' + post
-    
-    // reposition caret
-    this.ruleEditor.selectionStart = start + 1
-    this.ruleEditor.selectionEnd = start + 1
-    
-    // compare code
+    ruleEditor.session.insert(ruleEditor.getCursorPosition(), '\t')
     this.compareCode()
   }
   
