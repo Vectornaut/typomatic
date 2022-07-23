@@ -146,10 +146,10 @@ class Typomatic {
   }*/
   
   loadRules() {
-    var freshRules = []
-    var success = true
-    var code = ruleEditor.getValue()
-    var lines = code.replace(/\r/g, '').split('\n')
+    let freshRules = []
+    let errors = []
+    let code = ruleEditor.getValue()
+    let lines = code.replace(/\r/g, '').split('\n')
     /*this.msgArea.value = ''*/
     for (var i = 0; i < lines.length; i++) {
       var line = lines[i]
@@ -159,11 +159,16 @@ class Typomatic {
         }
       } catch (errorMsg) {
         /*this.msgArea.value += errorMsg*/
-        success = false
+        errors.push({
+          row: i,
+          column: 0,
+          text: errorMsg,
+          type: "error"
+        });
       }
       /*this.msgArea.value += '\n'*/
     }
-    if (success) {
+    if (errors.length === 0) {
       // set rules
       this.rules = freshRules
       
@@ -173,9 +178,11 @@ class Typomatic {
       // update GUI
       this.rulesButton.disabled = true
       this.rulesButton.classList.remove('error')
+      this.ruleEditor.session.clearAnnotations();
       /*this.msgArea.classList.remove('error')*/
     } else {
       this.rulesButton.classList.add('error')
+      this.ruleEditor.session.setAnnotations(errors);
       /*this.msgArea.classList.add('error')*/
     }
   }
