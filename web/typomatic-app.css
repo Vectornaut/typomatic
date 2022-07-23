@@ -145,7 +145,8 @@ input[type=button].error:not(:disabled):active {
 /* rules */
 
 #ruleContainer {
-	/*display: flex;*/
+	margin-top: 12px;
+	margin-bottom: 24px;
 	gap: 12px;
 	width: 100%;
 }
@@ -165,6 +166,7 @@ input[type=button].error:not(:disabled):active {
 	bottom: 0;
 	left: 0;
 	height: 400px;
+	border-radius: 4px;
 }
 
 #msgBar {
@@ -173,6 +175,10 @@ input[type=button].error:not(:disabled):active {
 
 #msgBar.error {
 	color: hsl(324, 100%, 50%);
+}
+
+td {
+	min-width: 80px;
 }
 
 /*#msgArea {

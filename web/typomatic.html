@@ -85,13 +85,39 @@
     <!--<textarea id="msgArea" rows="20" readonly disabled></textarea>--><!-- disabled to deflect focus -->
   </div>
   
-  </div>
+  <h2>Rule format</h2>
+  <table>
+  <tr>
+    <th class="ft">from</th>
+    <th class="ft">to</th>
+    <th class="ft">stop</th>
+    <th class="ft">sound</th>
+    <th class="ft">color</th>
+  </tr>
+  <tr>
+    <td style="font-style: italic">anything</td>
+    <td style="font-style: italic">anything</td>
+    <td>%</td>
+    <td>. + / $ # *</td>
+    <td>
+      <span class="pink-highlight">p</span>
+      <span class="orange-highlight">o</span>
+      <span class="yellow-highlight">y</span>
+      <span class="green-highlight">g</span>
+      <span class="blue-highlight">b</span>
+      <span class="violet-highlight">v</span>
+    </td>
+  </tr>
+  </table>
+  
+</div><!-- #content -->
 </body>
 
 <script>
 // set up editor
 var ruleEditor = ace.edit('ruleEditor');
 ruleEditor.setTheme('ace/theme/twilight');
+ruleEditor.setOption('showPrintMargin', false);
 /*ruleEditor.session.setMode("ace/mode/javascript");*/
 ruleEditor.session.setUseSoftTabs(false);
 ruleEditor.session.setTabSize(16);
