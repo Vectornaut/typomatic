@@ -34,19 +34,19 @@ class Rule {
     if (tokens.length >= 2) this.to = tokens[1]; else this.to = ''
     if (tokens.length >= 3) {
       if (tokens[2] in resources.stops) this.stop = resources.stops[tokens[2]]
-      else throw `"${tokens[2]}" is not the stop symbol, "%"`
+      else throw `“${tokens[2]}” isn’t the stop symbol %`
     } else {
       this.stop = false;
     }
     if (tokens.length >= 4) {
       if (tokens[3] in resources.sounds) this.sound = resources.sounds[tokens[3]]
-      else throw `"${tokens[3]}" is not a valid sound name`
+      else throw `“${tokens[3]}” isn’t one of the sound symbols . + / $ # *`
     } else {
       this.sound = resources.sounds['']
     }
     if (tokens.length >= 5) {
       if (tokens[4] in resources.colors) this.color = resources.colors[tokens[4]]
-      else throw `"${tokens[4]}" is not a valid color name`
+      else throw `“${tokens[4]}” isn’t one of the color symbols p o y g b v`
     } else {
       this.color = resources.colors['']
     }

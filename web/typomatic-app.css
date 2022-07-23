@@ -151,14 +151,6 @@ input[type=button].error:not(:disabled):active {
 	width: 100%;
 }
 
-/*#ruleContainer > textarea {
-	flex-grow: 1;
-	border-width: 1px;
-	border-radius: 4px;
-	background-color: #202020;
-	font-family: "Ubuntu Mono", Verdana, sans-serif;
-}*/
-
 #ruleEditor {
 	position: aboslute;
 	top: 0;
@@ -180,14 +172,3 @@ input[type=button].error:not(:disabled):active {
 td {
 	min-width: 80px;
 }
-
-/*#msgArea {
-	overflow: hidden;
-	border-style: none;
-	color: hsl(324, 100%, 50%);
-}
-
-#msgArea.error {
-	border-style: solid;
-	border-color: hsl(324, 100%, 20%);
-}*/
