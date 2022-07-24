@@ -147,7 +147,6 @@ input[type=button].error:not(:disabled):active {
 #ruleContainer {
 	margin-top: 12px;
 	margin-bottom: 24px;
-	gap: 12px;
 	width: 100%;
 }
 
@@ -170,6 +169,6 @@ input[type=button].error:not(:disabled):active {
 	color: hsl(324, 100%, 50%);
 }
 
-td {
+table td {
 	min-width: 80px;
 }
